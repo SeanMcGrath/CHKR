@@ -1,20 +1,25 @@
 'use strict';
 
 angular.module('chkrApp')
-  .controller('DailiesCtrl', function ($scope, $http, Auth) {
+  .controller('DailiesCtrl', function ($scope, $http, Auth, socket) {
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
-    $scope.dailies = Auth.getCurrentUser().dailies;
+
+    $http.get('/api/users/me').success(function(user) {
+      $scope.dailies = user.dailies;
+    });
 
     $scope.addDaily = function() {
     	if($scope.newDaily === ''){
     		return;
     	}
-    	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/dailies', { name: $scope.newDaily});
-      	$scope.newDaily = '';
-      	$scope.dailies = Auth.getCurrentUser().dailies;
+    	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/dailies', { name: $scope.newDaily})
+    		.success(function(){
+    			$scope.dailies.push({ name: $scope.newDaily});
+    			$scope.newDaily = '';
+    		});
     };
 
-    $scope.removeDaily = function() {}
+    $scope.removeDaily = function() {};
   });

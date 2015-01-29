@@ -11,8 +11,11 @@ angular.module('chkrApp')
     	if($scope.newTodo === ''){
     		return;
     	}
-    	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/todos', { name: $scope.newTodo});
-      	$scope.newTodo = '';
+    	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/todos', {name: $scope.newTodo})
+    		.success(function() {
+    			$scope.todos.push({name: $scope.newTodo});
+    			$scope.newTodo = '';
+    		});
     };
 
     $scope.removeToDo = function() {};
