@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('chkrApp')
-  .controller('DailiesCtrl', function ($scope, $http, Auth, socket) {
+  .controller('DailiesCtrl', function ($scope, $http, Auth) {
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
