@@ -13,5 +13,7 @@ router.get('/me', auth.isAuthenticated(), controller.me);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
+router.post('/:id/dailies', auth.isAuthenticated(), controller.addDaily);
+router.post('/:id/todos', auth.isAuthenticated(), controller.addTodo);
 
 module.exports = router;

@@ -1,8 +1,17 @@
 <div class="col-md-6" ng-controller='ToDoCtrl'>
 	<h1>To-Dos</h1>
-	<ul>
-		<li ng-repeat="todo in todos">
-            {{todo.name}}
+	<ul class="nav nav-tabs nav-stacked col-md-6" ng-repeat="todo in todos">
+		<li>
+            {{todo.name}} <button type="button" class="close">&times;</button>
         </li>
     </ul>
+    <br>
+    <form class="thing-form">
+      <p class="input-group">
+        <input type="text" class="form-control" placeholder="Add a new thing here." ng-model="newTodo">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-primary" ng-click="addTodo()">Add New</button>
+        </span>
+      </p>
+    </form>
 </div>

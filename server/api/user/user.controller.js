@@ -4,6 +4,7 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var _ = require('lodash');
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -99,3 +100,33 @@ exports.me = function(req, res, next) {
 exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
+
+// Updates an existing user in the DB.
+exports.addDaily = function(req, res, next) {
+  var userId = req.user._id;
+  User.findById(userId, function (err, user) {
+    user.dailies.push(req.body);
+    user.save(function(err) {
+        if (err) return validationError(res, err);
+        res.send(200);
+      });
+  });
+};
+
+// Updates an existing user in the DB.
+exports.addTodo = function(req, res, next) {
+  console.log('hello')
+  var userId = req.user._id;
+  User.findById(userId, function (err, user) {
+    user.todos.push(req.body);
+    user.save(function(err) {
+        if (err) return validationError(res, err);
+        res.send(200);
+      });
+  });
+};
+
+
+function handleError(res, err) {
+  return res.send(500, err);
+}
