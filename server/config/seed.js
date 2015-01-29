@@ -35,7 +35,13 @@ User.find({}).remove(function() {
     provider: 'local',
     name: 'Test User',
     email: 'test@test.com',
-    password: 'test'
+    password: 'test',
+    dailies: [{
+      name: 'Brush Teeth'
+    }],
+    todos: [{
+      name: 'Go to Doctor'
+    }]
   }, {
     provider: 'local',
     role: 'admin',

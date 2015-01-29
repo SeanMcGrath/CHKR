@@ -2,5 +2,8 @@
 
 angular.module('chkrApp')
   .controller('ToDoCtrl', function ($scope, Auth) {
-    $scope.message = 'Hello';
+    $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.isAdmin = Auth.isAdmin;
+    $scope.getCurrentUser = Auth.getCurrentUser;
+    $scope.todos = Auth.getCurrentUser().todos;
   });
