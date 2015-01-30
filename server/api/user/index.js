@@ -15,6 +15,6 @@ router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 router.post('/:id/dailies', auth.isAuthenticated(), controller.addDaily);
 router.post('/:id/todos', auth.isAuthenticated(), controller.addTodo);
-router.delete('/:id/todos', auth.isAuthenticated(), controller.removeTodo);
+router.put('/:id/todos', auth.isAuthenticated(), controller.removeTodo);
 
 module.exports = router;

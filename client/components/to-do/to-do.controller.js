@@ -19,6 +19,11 @@ angular.module('chkrApp')
     };
 
     $scope.removeToDo = function(todo) {
-    	$http.delete('/api/users/' + Auth.getCurrentUser()._id + '/todos', todo)
+    	$http.put('/api/users/' + Auth.getCurrentUser()._id + '/todos', todo)
+    		.success(function() {
+    			$scope.todos = $scope.todos.filter(function(e){
+     				return !_.isEqual(e,todo);
+    			});
+    		});
     };
   });

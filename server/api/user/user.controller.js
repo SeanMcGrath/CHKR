@@ -10,6 +10,14 @@ var validationError = function(res, err) {
   return res.json(422, err);
 };
 
+// Remove an element el from array arr if it exists
+var removeFromArray = function(arr, el, cb) {
+  var newArr = arr.filter(function(e) {
+    return !_.isEqual(e,el);
+  });
+  cb(newArr);
+};
+
 /**
  * Get list of users
  * restriction: 'admin'
@@ -127,15 +135,16 @@ exports.addTodo = function(req, res, next) {
 
 // Removes a Todo from a user in the db.
 exports.removeTodo = function(req, res, next){
+  console.log(req);
   var userId = req.user._id;
   User.findById(userId, function (err, user) {
-    user.todos = user.todos.filter(function(e){
-      return !_.isEqual(e,req.body);
-    });
-    user.save(function(err) {
+    removeFromArray(user.todos,req.body,function(newTodos) {
+      user.todos = newTodos;
+      user.save(function(err) {
         if (err) return validationError(res, err);
         res.send(200);
       });
+    });    
   });
 };
 
