@@ -115,10 +115,23 @@ exports.addDaily = function(req, res, next) {
 
 // Updates an existing user in the DB.
 exports.addTodo = function(req, res, next) {
-  console.log('hello')
   var userId = req.user._id;
   User.findById(userId, function (err, user) {
     user.todos.push(req.body);
+    user.save(function(err) {
+        if (err) return validationError(res, err);
+        res.send(200);
+      });
+  });
+};
+
+// Removes a Todo from a user in the db.
+exports.removeTodo = function(req, res, next){
+  var userId = req.user._id;
+  User.findById(userId, function (err, user) {
+    user.todos = user.todos.filter(function(e){
+      return !_.isEqual(e,req.body);
+    });
     user.save(function(err) {
         if (err) return validationError(res, err);
         res.send(200);
