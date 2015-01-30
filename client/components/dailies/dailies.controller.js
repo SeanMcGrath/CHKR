@@ -21,5 +21,12 @@ angular.module('chkrApp')
     		});
     };
 
-    $scope.removeDaily = function() {};
+    $scope.removeDaily = function(daily) {
+    	$http.put('/api/users/' + Auth.getCurrentUser()._id + '/dailies', daily)
+    		.success(function() {
+    			$scope.dailies = $scope.dailies.filter(function(e){
+     				return !_.isEqual(e,daily);
+    			});
+    		});
+    };
   });

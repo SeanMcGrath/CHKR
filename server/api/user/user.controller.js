@@ -121,6 +121,20 @@ exports.addDaily = function(req, res, next) {
   });
 };
 
+// Removes a daily task from a user in the db.
+exports.removeDaily = function(req, res, next){
+  var userId = req.user._id;
+  User.findById(userId, function (err, user) {
+    removeFromArray(user.dailies,req.body,function(newDailies) {
+      user.dailies = newDailies;
+      user.save(function(err) {
+        if (err) return validationError(res, err);
+        res.send(200);
+      });
+    });    
+  });
+};
+
 // Updates an existing user in the DB.
 exports.addTodo = function(req, res, next) {
   var userId = req.user._id;
@@ -135,7 +149,6 @@ exports.addTodo = function(req, res, next) {
 
 // Removes a Todo from a user in the db.
 exports.removeTodo = function(req, res, next){
-  console.log(req);
   var userId = req.user._id;
   User.findById(userId, function (err, user) {
     removeFromArray(user.todos,req.body,function(newTodos) {
