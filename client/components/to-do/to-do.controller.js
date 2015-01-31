@@ -26,4 +26,8 @@ angular.module('chkrApp')
     			});
     		});
     };
+
+    $scope.toggleDone = function(todo) {
+    	todo.done = !todo.done;
+    };
   });

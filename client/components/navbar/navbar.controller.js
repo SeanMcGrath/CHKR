@@ -20,4 +20,8 @@ angular.module('chkrApp')
     $scope.isActive = function(route) {
       return route === $location.path();
     };
+
+    $scope.toggleMenu = function() {
+      $("#wrapper").toggleClass("toggled");
+    }
   });

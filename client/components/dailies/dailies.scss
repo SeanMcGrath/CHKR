@@ -1,5 +1,5 @@
 .task {
-	padding-top: 4px;
+	padding-top: 6px;
 	padding-bottom: 4px;
 }
 
@@ -10,4 +10,30 @@
 .task-list {
 	-webkit-padding-start: 15px;
 	margin-right: 10px;
+}
+
+.btn-primary {
+	background-color: $brand-accent;
+	border-color: $brand-accent-dark;
+
+	:hover {
+		background-color: $brand-accent-dark;
+	}
+}
+
+.check {
+	margin-right: 20px;
+	color: $brand-green;
+	opacity: 0.9;
+
+	:hover {
+		color: $brand-green;
+		opacity: 0.9;
+	}
+}
+
+.task.done {
+	background-color: gray;
+	color: #000;
+	text-decoration: line-through;
 }

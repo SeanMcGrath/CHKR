@@ -1,8 +1,8 @@
 <div ng-controller='DailiesCtrl'>
 	<h1>Daily Tasks</h1>
 	<ul class="row task-list">
-		<li class="nav nav-tabs col-lg-12 task" ng-repeat="daily in dailies">
-            <span class="task-name">{{daily.name}}</span> <button type="button" class="close" ng-click='removeDaily(daily)'>&times;</button>
+		<li class="nav nav-tabs col-lg-12 task" ng-class="{done: daily.done}" ng-repeat="daily in dailies">
+            <span class="task-name">{{daily.name}}</span> <button type="button" class="close" ng-click='removeDaily(daily)'>&times;</button> <button type="button" class="close check" ng-click="toggleDone(daily)"><span class="glyphicon glyphicon-ok"></span></button>
         </li>
     </ul>
     <form class="task-form">

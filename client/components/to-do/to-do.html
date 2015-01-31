@@ -1,8 +1,8 @@
 <div ng-controller='ToDoCtrl'>
 	<h1>To-Dos</h1>
 	<div class="row task-list">
-		<li class="nav nav-tabs col-md-12 task" ng-repeat="todo in todos">
-            <span class="task-name">{{todo.name}}</span> <button type="button" class="close" ng-click="removeToDo(todo)">&times;</button>
+		<li class="nav nav-tabs col-md-12 task" ng-class="{done: todo.done}" ng-repeat="todo in todos">
+            <span class="task-name">{{todo.name}}</span> <button type="button" class="close" ng-click="removeToDo(todo)">&times;</button> <button type="button" class="close check" ng-click="toggleDone(todo)"><span class="glyphicon glyphicon-ok"></span></button>
         </li>
 	</div>
     <form class="task-form">
