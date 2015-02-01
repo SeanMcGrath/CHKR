@@ -25,7 +25,7 @@ angular.module('chkrApp')
     	$http.put('/api/users/' + Auth.getCurrentUser()._id + '/dailies', daily)
     		.success(function() {
     			$scope.dailies = $scope.dailies.filter(function(e){
-     				return !_.isEqual(e,daily);
+     				return !(e.id === daily.id);
     			});
     		});
     };

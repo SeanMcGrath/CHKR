@@ -14,10 +14,12 @@ User.find({}).remove(function() {
     email: 'test@test.com',
     password: 'test',
     dailies: [{
+      id: 'default1',
       name: 'Brush Teeth',
       done: false
     }],
     todos: [{
+      id: 'default2',
       name: 'Go to Doctor',
       done: false
     }]

@@ -13,10 +13,21 @@ var validationError = function(res, err) {
 // Remove an element el from array arr if it exists
 var removeFromArray = function(arr, el, cb) {
   var newArr = arr.filter(function(e) {
-    return !_.isEqual(e,el);
+    return !(e.id === el.id);
   });
   cb(newArr);
 };
+
+// Counter functions to generate sequential IDs
+function makeCounter() {
+    var i = 0;
+    return function() {
+        return i++;
+    }
+}
+
+var dailyID = makeCounter();
+var todoID = makeCounter();
 
 /**
  * Get list of users
@@ -113,7 +124,9 @@ exports.authCallback = function(req, res, next) {
 exports.addDaily = function(req, res, next) {
   var userId = req.user._id;
   User.findById(userId, function (err, user) {
-    user.dailies.push(req.body);
+    var newDaily = req.body;
+    newDaily.id = dailyID();
+    user.dailies.push(newDaily);
     user.save(function(err) {
         if (err) return validationError(res, err);
         res.send(200);
@@ -135,11 +148,25 @@ exports.removeDaily = function(req, res, next){
   });
 };
 
-// Updates an existing user in the DB.
-exports.addTodo = function(req, res, next) {
+// update the fields ina user's existing daily.
+exports.updateDaily = function(req,res,next) {
   var userId = req.user._id;
   User.findById(userId, function (err, user) {
     user.todos.push(req.body);
+    user.save(function(err) {
+        if (err) return validationError(res, err);
+        res.send(200);
+      });
+  });
+};
+
+// adds a todo to an existing user in the DB.
+exports.addTodo = function(req, res, next) {
+  var userId = req.user._id;
+  User.findById(userId, function (err, user) {
+    var newTodo = req.body;
+    newTodo.id = todoID();
+    user.todos.push(newTodo);
     user.save(function(err) {
         if (err) return validationError(res, err);
         res.send(200);

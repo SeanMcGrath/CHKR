@@ -22,7 +22,7 @@ angular.module('chkrApp')
     	$http.put('/api/users/' + Auth.getCurrentUser()._id + '/todos', todo)
     		.success(function() {
     			$scope.todos = $scope.todos.filter(function(e){
-     				return !_.isEqual(e,todo);
+     				return !(e.id === todo.id);
     			});
     		});
     };
