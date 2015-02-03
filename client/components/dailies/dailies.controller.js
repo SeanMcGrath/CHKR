@@ -45,7 +45,6 @@ angular.module('chkrApp')
 
     $scope.toggleDone = function(daily) {
     	for (var i=0; i < $scope.dailies.length; i++){
-    		console.log(daily.id + ' ' + $scope.dailies[i].id)
     		if (daily.id === $scope.dailies[i].id) {
     			$scope.dailies[i].done = !$scope.dailies[i].done;
     			break;

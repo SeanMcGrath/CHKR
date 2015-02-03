@@ -3,10 +3,10 @@
 <div id="page-contents-wrapper">
   <div class="container">
     <div class="row">
-      <div class="col-sm-12">
+      <div class="col-sm-12 col-md-6 col-md-offset-3">
         <h1>Sign up</h1>
       </div>
-      <div class="col-sm-12">
+      <div class="col-sm-12 col-md-6 col-md-offset-3">
         <form class="form" name="form" ng-submit="register(form)" novalidate>
 
           <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
@@ -79,6 +79,12 @@
         </form>
       </div>
     </div>
-    <hr>
   </div>
+
+  <footer class="footer">
+    <div class="container-fluid">
+        <p>Chkr V0.1 | <a href="http://www.smcgrath.me">Sean McGrath</a> </p>
+    </div>
+  </footer>
+  
 </div>

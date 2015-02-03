@@ -42,7 +42,6 @@ angular.module('chkrApp')
 
     $scope.toggleDone = function(todo) {
     	for (var i=0; i < $scope.todos.length; i++){
-    		console.log(todo.id + ' ' + $scope.todos[i].id)
     		if (todo.id === $scope.todos[i].id) {
     			$scope.todos[i].done = !$scope.todos[i].done;
     			break;
