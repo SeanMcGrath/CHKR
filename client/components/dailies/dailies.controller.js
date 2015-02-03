@@ -1,5 +1,15 @@
 'use strict';
 
+// Counter functions to generate sequential IDs
+function makeCounter() {
+    var i = 0;
+    return function() {
+        return i++;
+    }
+}
+
+var dailyID = makeCounter();
+
 angular.module('chkrApp')
   .controller('DailiesCtrl', function ($scope, $http, Auth) {
     $scope.isLoggedIn = Auth.isLoggedIn;
@@ -7,16 +17,17 @@ angular.module('chkrApp')
     $scope.getCurrentUser = Auth.getCurrentUser;
 
     $http.get('/api/users/me').success(function(user) {
-      $scope.dailies = user.dailies;
+      	$scope.dailies = user.dailies;
     });
 
     $scope.addDaily = function() {
     	if($scope.newDaily === ''){
     		return;
     	}
-    	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/dailies', { name: $scope.newDaily})
+    	var nd = { name: $scope.newDaily, id: dailyID(), done: false};
+    	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/newdaily', nd )
     		.success(function(){
-    			$scope.dailies.push({ name: $scope.newDaily});
+    			$scope.dailies.push(nd);
     			$scope.newDaily = '';
     		});
     };
@@ -31,6 +42,14 @@ angular.module('chkrApp')
     };
 
     $scope.toggleDone = function(daily) {
-    	daily.done = !daily.done;
+    	for (var i=0; i < $scope.dailies.length; i++){
+    		if (daily.id === $scope.dailies[i].id) {
+    			$scope.dailies[i].done = !$scope.dailies[i].done;
+    		}
+    	}
+    	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/dailies', {dailies: $scope.dailies})
+    		.success(function() {
+    			console.log('Updated dailies.')
+    		});
     };
   });

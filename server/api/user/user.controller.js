@@ -4,7 +4,6 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
-var _ = require('lodash');
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -17,17 +16,6 @@ var removeFromArray = function(arr, el, cb) {
   });
   cb(newArr);
 };
-
-// Counter functions to generate sequential IDs
-function makeCounter() {
-    var i = 0;
-    return function() {
-        return i++;
-    }
-}
-
-var dailyID = makeCounter();
-var todoID = makeCounter();
 
 /**
  * Get list of users
@@ -124,9 +112,7 @@ exports.authCallback = function(req, res, next) {
 exports.addDaily = function(req, res, next) {
   var userId = req.user._id;
   User.findById(userId, function (err, user) {
-    var newDaily = req.body;
-    newDaily.id = dailyID();
-    user.dailies.push(newDaily);
+    user.dailies.push(req.body);
     user.save(function(err) {
         if (err) return validationError(res, err);
         res.send(200);
@@ -148,15 +134,11 @@ exports.removeDaily = function(req, res, next){
   });
 };
 
-// update the fields ina user's existing daily.
+// update the fields in a user's existing daily.
 exports.updateDaily = function(req,res,next) {
-  var userId = req.user._id;
-  User.findById(userId, function (err, user) {
-    user.todos.push(req.body);
-    user.save(function(err) {
-        if (err) return validationError(res, err);
-        res.send(200);
-      });
+  var userId = {_id: req.user._id};
+  User.findOneAndUpdate(userId, req.body, function (err, user) {
+    if (err) throw err;
   });
 };
 
@@ -164,13 +146,11 @@ exports.updateDaily = function(req,res,next) {
 exports.addTodo = function(req, res, next) {
   var userId = req.user._id;
   User.findById(userId, function (err, user) {
-    var newTodo = req.body;
-    newTodo.id = todoID();
-    user.todos.push(newTodo);
+    user.todos.push(req.body);
     user.save(function(err) {
-        if (err) return validationError(res, err);
-        res.send(200);
-      });
+      if (err) return validationError(res, err);
+      res.send(200);
+    });
   });
 };
 
@@ -188,6 +168,13 @@ exports.removeTodo = function(req, res, next){
   });
 };
 
+// update the fields in a user's existing todo.
+exports.updateTodo = function(req,res,next) {
+  var userId = {_id: req.user._id};
+  User.findOneAndUpdate(userId, req.body, function (err, user) {
+    if (err) throw err;
+  });
+};
 
 function handleError(res, err) {
   return res.send(500, err);

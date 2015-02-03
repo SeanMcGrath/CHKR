@@ -1,5 +1,15 @@
 'use strict';
 
+// Counter functions to generate sequential IDs
+function makeCounter() {
+    var i = 0;
+    return function() {
+        return i++;
+    }
+}
+
+var todoID = makeCounter();
+
 angular.module('chkrApp')
   .controller('ToDoCtrl', function ($scope, $http, Auth) {
     $scope.isLoggedIn = Auth.isLoggedIn;
@@ -11,9 +21,10 @@ angular.module('chkrApp')
     	if($scope.newTodo === ''){
     		return;
     	}
-    	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/todos', {name: $scope.newTodo})
+    	var nt = {id: todoID(), name: $scope.newTodo, done: false};
+    	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/newtodo', nt)
     		.success(function() {
-    			$scope.todos.push({name: $scope.newTodo});
+    			$scope.todos.push(nt);
     			$scope.newTodo = '';
     		});
     };
@@ -28,6 +39,14 @@ angular.module('chkrApp')
     };
 
     $scope.toggleDone = function(todo) {
-    	todo.done = !todo.done;
+    	for (var i=0; i < $scope.todos.length; i++){
+    		if (todo.id === $scope.todos[i].id) {
+    			$scope.todos[i].done = !$scope.todos[i].done;
+    		}
+    	}
+    	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/todos', {todos: $scope.todos})
+    		.success(function() {
+		      	console.log("Updated Todos");
+		    });
     };
   });
