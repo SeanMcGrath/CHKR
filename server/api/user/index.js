@@ -13,12 +13,8 @@ router.get('/me', auth.isAuthenticated(), controller.me);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
-router.post('/:id/newdaily', auth.isAuthenticated(), controller.addDaily);
-router.post('/:id/newtodo', auth.isAuthenticated(), controller.addTodo);
-router.put('/:id/todos', auth.isAuthenticated(), controller.removeTodo);
-router.put('/:id/dailies', auth.isAuthenticated(), controller.removeDaily);
-router.post('/:id/todos', auth.isAuthenticated(), controller.updateTodo);
-router.post('/:id/dailies', auth.isAuthenticated(), controller.updateDaily);
+router.post('/:id/todos', auth.isAuthenticated(), controller.updateTodos);
+router.post('/:id/dailies', auth.isAuthenticated(), controller.updateDailies);
 
 
 module.exports = router;

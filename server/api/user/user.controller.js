@@ -108,71 +108,21 @@ exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
 
-// Updates an existing user in the DB.
-exports.addDaily = function(req, res, next) {
-  var userId = req.user._id;
-  User.findById(userId, function (err, user) {
-    user.dailies.push(req.body);
-    user.save(function(err) {
-        if (err) return validationError(res, err);
-        res.send(200);
-      });
-  });
-};
-
-// Removes a daily task from a user in the db.
-exports.removeDaily = function(req, res, next){
-  var userId = req.user._id;
-  User.findById(userId, function (err, user) {
-    removeFromArray(user.dailies,req.body,function(newDailies) {
-      user.dailies = newDailies;
-      user.save(function(err) {
-        if (err) return validationError(res, err);
-        res.send(200);
-      });
-    });    
-  });
-};
-
 // update the fields in a user's existing daily.
-exports.updateDaily = function(req,res,next) {
+exports.updateDailies = function(req,res,next) {
   var userId = {_id: req.user._id};
   User.findOneAndUpdate(userId, req.body, function (err, user) {
     if (err) throw err;
-  });
-};
-
-// adds a todo to an existing user in the DB.
-exports.addTodo = function(req, res, next) {
-  var userId = req.user._id;
-  User.findById(userId, function (err, user) {
-    user.todos.push(req.body);
-    user.save(function(err) {
-      if (err) return validationError(res, err);
-      res.send(200);
-    });
-  });
-};
-
-// Removes a Todo from a user in the db.
-exports.removeTodo = function(req, res, next){
-  var userId = req.user._id;
-  User.findById(userId, function (err, user) {
-    removeFromArray(user.todos,req.body,function(newTodos) {
-      user.todos = newTodos;
-      user.save(function(err) {
-        if (err) return validationError(res, err);
-        res.send(200);
-      });
-    });    
+    res.send(200);
   });
 };
 
 // update the fields in a user's existing todo.
-exports.updateTodo = function(req,res,next) {
+exports.updateTodos = function(req,res,next) {
   var userId = {_id: req.user._id};
   User.findOneAndUpdate(userId, req.body, function (err, user) {
     if (err) throw err;
+    res.send(200);
   });
 };
 
