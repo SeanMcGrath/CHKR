@@ -5,7 +5,7 @@ function makeCounter() {
     var i = 0;
     return function() {
         return i++;
-    }
+    };
 }
 
 var todoID = makeCounter();
@@ -26,14 +26,17 @@ angular.module('chkrApp')
 		$scope.newTodo = '';
     	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/todos', {todos: $scope.todos})
     		.success(function(){
-    			console.log('Added todo.')
+    			console.log('Added todo.');
     		});
     };
 
     $scope.removeTodo = function(todo) {
     	$scope.todos = $scope.todos.filter(function(e){
-			return !(e.id === todo.id);
+			return e.id !== todo.id;
 		});
+		if ($scope.todos === undefined){
+			$scope.todos = [];
+		}
 		$http.post('api/users/' + Auth.getCurrentUser()._id + '/todos', {todos: $scope.todos})
 			.success(function() {
 				console.log('Removed Todo');
@@ -49,7 +52,7 @@ angular.module('chkrApp')
     	}
     	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/todos', {todos: $scope.todos})
     		.success(function() {
-    			console.log('Updated todos.')
+    			console.log('Updated todos.');
     		});
     };
   });

@@ -5,7 +5,7 @@ function makeCounter() {
     var i = 0;
     return function() {
         return i++;
-    }
+    };
 }
 
 var dailyID = makeCounter();
@@ -24,18 +24,21 @@ angular.module('chkrApp')
     	if($scope.newDaily === ''){
     		return;
     	}
+    	if ($scope.dailies === undefined){
+			$scope.dailies = [];
+		}
     	var nd = { name: $scope.newDaily, id: dailyID(), done: false};
     	$scope.dailies.push(nd);
 		$scope.newDaily = '';
     	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/dailies', {dailies: $scope.dailies})
     		.success(function(){
-    			console.log('Added daily.')
+    			console.log('Added daily.');
     		});
     };
 
     $scope.removeDaily = function(daily) {
     	$scope.dailies = $scope.dailies.filter(function(e){
-			return !(e.id === daily.id);
+			return e.id !== daily.id;
 		});
 		$http.post('api/users/' + Auth.getCurrentUser()._id + '/dailies', {dailies: $scope.dailies})
 			.success(function() {
@@ -52,7 +55,7 @@ angular.module('chkrApp')
     	}
     	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/dailies', {dailies: $scope.dailies})
     		.success(function() {
-    			console.log('Updated dailies.')
+    			console.log('Updated dailies.');
     		});
     };
   });

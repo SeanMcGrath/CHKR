@@ -12,7 +12,7 @@ var validationError = function(res, err) {
 // Remove an element el from array arr if it exists
 var removeFromArray = function(arr, el, cb) {
   var newArr = arr.filter(function(e) {
-    return !(e.id === el.id);
+    return e.id !== el.id;
   });
   cb(newArr);
 };

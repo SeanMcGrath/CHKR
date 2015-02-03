@@ -22,6 +22,6 @@ angular.module('chkrApp')
     };
 
     $scope.toggleMenu = function() {
-      $("#wrapper").toggleClass("toggled");
-    }
+      $('#wrapper').toggleClass('toggled');
+    };
   });
