@@ -21,32 +21,36 @@ angular.module('chkrApp')
     	if($scope.newTodo === ''){
     		return;
     	}
-    	var nt = {id: todoID(), name: $scope.newTodo, done: false};
-    	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/newtodo', nt)
-    		.success(function() {
-    			$scope.todos.push(nt);
-    			$scope.newTodo = '';
+    	var nd = { name: $scope.newTodo, id: todoID(), done: false};
+    	$scope.todos.push(nd);
+		$scope.newTodo = '';
+    	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/todos', {todos: $scope.todos})
+    		.success(function(){
+    			console.log('Added todo.')
     		});
     };
 
-    $scope.removeToDo = function(todo) {
-    	$http.put('/api/users/' + Auth.getCurrentUser()._id + '/todos', todo)
-    		.success(function() {
-    			$scope.todos = $scope.todos.filter(function(e){
-     				return !(e.id === todo.id);
-    			});
-    		});
+    $scope.removeTodo = function(todo) {
+    	$scope.todos = $scope.todos.filter(function(e){
+			return !(e.id === todo.id);
+		});
+		$http.post('api/users/' + Auth.getCurrentUser()._id + '/todos', {todos: $scope.todos})
+			.success(function() {
+				console.log('Removed Todo');
+			});
     };
 
     $scope.toggleDone = function(todo) {
     	for (var i=0; i < $scope.todos.length; i++){
+    		console.log(todo.id + ' ' + $scope.todos[i].id)
     		if (todo.id === $scope.todos[i].id) {
     			$scope.todos[i].done = !$scope.todos[i].done;
+    			break;
     		}
     	}
     	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/todos', {todos: $scope.todos})
     		.success(function() {
-		      	console.log("Updated Todos");
-		    });
+    			console.log('Updated todos.')
+    		});
     };
   });

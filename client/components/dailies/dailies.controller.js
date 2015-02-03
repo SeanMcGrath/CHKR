@@ -25,26 +25,30 @@ angular.module('chkrApp')
     		return;
     	}
     	var nd = { name: $scope.newDaily, id: dailyID(), done: false};
-    	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/newdaily', nd )
+    	$scope.dailies.push(nd);
+		$scope.newDaily = '';
+    	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/dailies', {dailies: $scope.dailies})
     		.success(function(){
-    			$scope.dailies.push(nd);
-    			$scope.newDaily = '';
+    			console.log('Added daily.')
     		});
     };
 
     $scope.removeDaily = function(daily) {
-    	$http.put('/api/users/' + Auth.getCurrentUser()._id + '/dailies', daily)
-    		.success(function() {
-    			$scope.dailies = $scope.dailies.filter(function(e){
-     				return !(e.id === daily.id);
-    			});
-    		});
+    	$scope.dailies = $scope.dailies.filter(function(e){
+			return !(e.id === daily.id);
+		});
+		$http.post('api/users/' + Auth.getCurrentUser()._id + '/dailies', {dailies: $scope.dailies})
+			.success(function() {
+				console.log('Removed Daily');
+			});
     };
 
     $scope.toggleDone = function(daily) {
     	for (var i=0; i < $scope.dailies.length; i++){
+    		console.log(daily.id + ' ' + $scope.dailies[i].id)
     		if (daily.id === $scope.dailies[i].id) {
     			$scope.dailies[i].done = !$scope.dailies[i].done;
+    			break;
     		}
     	}
     	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/dailies', {dailies: $scope.dailies})
