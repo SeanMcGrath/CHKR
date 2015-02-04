@@ -128,11 +128,15 @@
         color: #999999;
     }
 
-    a:hover {
+    &:hover {
         text-decoration: none;
         color: #fff;
         background: rgba(255,255,255,0.2);
     }
+}
+
+#wrapper > #arrow {
+    color: white;
 }
 
 @media(min-width:768px) {
@@ -141,7 +145,7 @@
     }
 
     #wrapper.toggled {
-        padding-left: 0px;
+        padding-left: 40px;
         margin-left: 0px;
         left: 0px;
     }
