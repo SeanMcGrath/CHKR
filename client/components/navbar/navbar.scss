@@ -51,6 +51,7 @@
 /* Sidebar Styles */
 
 .sidebar-nav {
+    display: none;
     position: absolute;
     top: 0;
     width: 210px;
@@ -100,7 +101,7 @@
    z-index: 1000;
    position: fixed;
    left: 420px;
-   width: 40px;
+   width: 0px;
    height: 100%;
    margin-left: -210px;
    overflow-y: auto;
@@ -117,7 +118,7 @@
     top: 0;
     background-color: black;
     height: 100%;
-    width: 40px;
+    width: 0px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -150,6 +151,10 @@
         left: 0px;
     }
 
+    #toggle-wrapper {
+        width: 40px;
+    }
+
     #sidebar-wrapper {
         width: 250px;
     }
@@ -176,5 +181,14 @@
     #wrapper.toggled #toggle-wrapper {
         left: 0px;
         margin: 0px;
+    }
+
+    .toggle-nav {
+        width: 40px;
+        margin: 0;
+    }
+
+    .sidebar-nav {
+        display: block;
     }
 }
