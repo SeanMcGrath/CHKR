@@ -15,14 +15,13 @@
 }
 
 #wrapper.toggled {
-    padding-left: 250px;
 }
 
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
     left: 250px;
-    width: 0;
+    width: 0px;
     height: 100%;
     margin-left: -250px;
     overflow-y: auto;
@@ -34,7 +33,7 @@
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    width: 250px;
+    width: 0px;
 }
 
 #page-content-wrapper {
@@ -157,6 +156,7 @@
 
     #sidebar-wrapper {
         width: 250px;
+        display: block;
     }
 
     #wrapper.toggled #sidebar-wrapper {
