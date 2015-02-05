@@ -55,4 +55,13 @@ angular.module('chkrApp')
     			console.log('Updated todos.');
     		});
     };
+
+    $scope.toggleEdit = function(todo) {
+        for (var i=0; i < $scope.todos.length; i++){
+            if (todo.id === $scope.todos[i].id) {
+                $scope.todos[i].editable = !$scope.todos[i].editable;
+                break;
+            }
+        }
+    }
   });

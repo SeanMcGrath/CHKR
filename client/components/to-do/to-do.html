@@ -1,13 +1,22 @@
 <div ng-controller='ToDoCtrl'>
 	<h1>To Do</h1>
 	<div class="row task-list">
-		<li class="nav nav-tabs col-md-12 task" ng-class="{done: todo.done}" ng-repeat="todo in todos">
-            <span class="task-name">{{todo.name}}</span> <button type="button" class="close" ng-click="removeTodo(todo)">&times;</button> <button type="button" class="close check" ng-click="toggleDone(todo)"><span class="glyphicon glyphicon-ok"></span></button><button type="button" class="close edit"><span class="glyphicon glyphicon-edit"></span></button>
-        </li>
+		<li class="nav nav-tabs col-md-12 task" ng-class="{done: todo.done, editable: todo.editable}" ng-repeat="todo in todos">
+      <span class="task-name">{{todo.name}}</span>
+      <button type="button" class="close check" ng-click="toggleDone(todo)">
+        <span class="glyphicon glyphicon-ok"></span>
+      </button>
+      <button type="button" class="close edit" ng-click="toggleEdit(todo)">
+        <span class="glyphicon glyphicon-edit"></span>
+      </button>
+      <div class='task-edit' ng-class="{show: todo.editable}">
+        <button type="button" class="close" ng-click='removeTodo(todo)' ng-show="todo.editable">&times;</button>
+      </div>
+    </li>
 	</div>
     <form class="task-form">
       <p class="input-group">
-        <input type="text" class="form-control" placeholder="Add a new To-Do" ng-model="newTodo">
+        <input type="text" class="form-control" placeholder="Add a new To Do" ng-model="newTodo">
         <span class="input-group-btn">
           <button type="submit" class="btn btn-primary" ng-click="addTodo()">Add New</button>
         </span>

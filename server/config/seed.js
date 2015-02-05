@@ -16,12 +16,14 @@ User.find({}).remove(function() {
     dailies: [{
       id: 'default1',
       name: 'Brush Teeth',
-      done: false
+      done: false,
+      editable: false
     }],
     todos: [{
       id: 'default2',
       name: 'Go to Doctor',
-      done: false
+      done: false,
+      editable: false
     }]
   }, {
     provider: 'local',

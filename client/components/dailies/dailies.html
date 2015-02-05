@@ -1,9 +1,19 @@
 <div ng-controller='DailiesCtrl'>
 	<h1>Daily Tasks</h1>
 	<ul class="row task-list">
-		<li class="nav nav-tabs col-lg-12 task" ng-class="{done: daily.done}" ng-repeat="daily in dailies">
-            <span class="task-name">{{daily.name}}</span> <button type="button" class="close" ng-click='removeDaily(daily)'>&times;</button> <button type="button" class="close check" ng-click="toggleDone(daily)"><span class="glyphicon glyphicon-ok"></span></button><button type="button" class="close edit"><span class="glyphicon glyphicon-edit"></span></button>
-        </li>
+		<li class="nav nav-tabs col-lg-12 task" ng-class="{done: daily.done, editable: daily.editable}" ng-repeat="daily in dailies">
+      <span class="task-name">{{daily.name}}</span>
+      <button type="button" class="close check" ng-click="toggleDone(daily)">
+        <span class="glyphicon glyphicon-ok"></span>
+      </button>
+      <button type="button" class="close edit" ng-click="toggleEdit(daily)">
+        <span class="glyphicon glyphicon-edit"></span>
+      </button>
+      <br>
+      <div class='task-edit' ng-class="{show: daily.editable}">
+        <button type="button" class="close" ng-click='removeDaily(daily)' ng-show="daily.editable">&times;</button>
+      </div>
+    </li>
     </ul>
     <form class="task-form">
       <p class="input-group">

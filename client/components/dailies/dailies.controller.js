@@ -27,7 +27,7 @@ angular.module('chkrApp')
     	if ($scope.dailies === undefined){
 			$scope.dailies = [];
 		}
-    	var nd = { name: $scope.newDaily, id: dailyID(), done: false};
+    	var nd = { name: $scope.newDaily, id: dailyID(), done: false, editable: false};
     	$scope.dailies.push(nd);
 		$scope.newDaily = '';
     	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/dailies', {dailies: $scope.dailies})
@@ -58,4 +58,13 @@ angular.module('chkrApp')
     			console.log('Updated dailies.');
     		});
     };
+
+    $scope.toggleEdit = function(daily) {
+        for (var i=0; i < $scope.dailies.length; i++){
+            if (daily.id === $scope.dailies[i].id) {
+                $scope.dailies[i].editable = !$scope.dailies[i].editable;
+                break;
+            }
+        }
+    }
   });

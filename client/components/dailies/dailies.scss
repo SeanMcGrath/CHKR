@@ -1,6 +1,11 @@
 .task {
 	padding-top: 6px;
 	padding-bottom: 4px;
+
+	&.editable {
+		height: 70px;
+		padding-bottom: 2px;
+	}
 }
 
 .task-name {
@@ -15,6 +20,37 @@
 .task-list {
 	-webkit-padding-start: 15px;
 	margin-right: 10px;
+}
+
+.task-edit {
+	position: absolute;
+	bottom: 0px;
+	background-color: #cccccc;
+	width: 100%;
+	height: 0px;
+	padding: 0px;
+	margin: 0;
+	display: block;
+	line-height: 40px;
+	padding-right: 20px;
+
+	button {
+		margin-top: 4px;
+		margin-right: 20px;
+
+		&.close {
+			color: red;
+			opacity: 0.6;
+
+			&:hover{
+				opacity: 0.9;
+			}
+		}
+	}
+
+	&.show {
+		height: 30px;
+	}
 }
 
 .btn-primary {
