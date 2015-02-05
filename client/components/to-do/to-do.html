@@ -6,7 +6,7 @@
       <button type="button" class="close check" ng-click="toggleDone(todo)">
         <span class="glyphicon glyphicon-ok"></span>
       </button>
-      <button type="button" class="close edit" ng-click="toggleEdit(todo)">
+      <button type="button" class="close edit" ng-click="todo.editable = !todo.editable">
         <span class="glyphicon glyphicon-edit"></span>
       </button>
       <div class='task-edit' ng-class="{show: todo.editable}">

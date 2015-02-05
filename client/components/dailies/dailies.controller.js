@@ -15,11 +15,8 @@ angular.module('chkrApp')
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
-
-    $http.get('/api/users/me').success(function(user) {
-      	$scope.dailies = user.dailies;
-    });
-
+    $scope.dailies = Auth.getCurrentUser().dailies;
+    
     $scope.addDaily = function() {
     	if($scope.newDaily === ''){
     		return;
@@ -58,13 +55,4 @@ angular.module('chkrApp')
     			console.log('Updated dailies.');
     		});
     };
-
-    $scope.toggleEdit = function(daily) {
-        for (var i=0; i < $scope.dailies.length; i++){
-            if (daily.id === $scope.dailies[i].id) {
-                $scope.dailies[i].editable = !$scope.dailies[i].editable;
-                break;
-            }
-        }
-    }
   });
