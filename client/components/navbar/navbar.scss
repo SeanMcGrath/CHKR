@@ -63,6 +63,10 @@
 .sidebar-nav li {
     text-indent: 20px;
     line-height: 40px;
+
+    &.user-name {
+        color: $brand-accent;
+    }
 }
 
 .sidebar-nav li a {

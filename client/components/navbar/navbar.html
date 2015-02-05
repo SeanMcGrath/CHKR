@@ -3,7 +3,7 @@
       <li class="sidebar-brand">
           <a href="/">CHKR</a>
       </li>
-      <li ng-show="isLoggedIn()">{{ getCurrentUser().name }} </li>
+      <li ng-show="isLoggedIn()" class="user-name">{{ getCurrentUser().name }} </li>
       <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
             <a ng-href="{{item.link}}">{{item.title}}</a>
       </li>
