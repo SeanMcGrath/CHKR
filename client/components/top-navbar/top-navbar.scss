@@ -17,7 +17,7 @@
 
 	ul {
 		display: inline-block;
-		width: 100%;
+		width: 20%;
 		list-style: none;
 		line-height: 40px;
 		padding-left: 0px;
@@ -60,6 +60,21 @@
 					text-decoration: none;
 				}
 			}
+		}
+	}
+
+	ul.pull-right {
+		display: inline-block;
+		padding: 0px;
+		width: 100px;
+
+		li {
+			display: inline-block;
+			
+			a {
+				display: block;
+			}
+
 		}
 	}
 }
