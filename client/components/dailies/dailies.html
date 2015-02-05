@@ -11,7 +11,9 @@
       </button>
       <br>
       <div class='task-edit' ng-class="{show: daily.editable}">
-        <button type="button" class="close" ng-click='removeDaily(daily)' ng-show="daily.editable">&times;</button>
+        <button type="button" class="close" ng-click='removeDaily(daily)' ng-show="daily.editable">
+          <span class="glyphicon glyphicon-trash"></span>
+        </button>
       </div>
     </li>
     </ul>

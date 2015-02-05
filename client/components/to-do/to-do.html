@@ -10,7 +10,9 @@
         <span class="glyphicon glyphicon-edit"></span>
       </button>
       <div class='task-edit' ng-class="{show: todo.editable}">
-        <button type="button" class="close" ng-click='removeTodo(todo)' ng-show="todo.editable">&times;</button>
+        <button type="button" class="close" ng-click='removeTodo(todo)' ng-show="todo.editable">
+          <span class="glyphicon glyphicon-trash"></span>
+        </button>
       </div>
     </li>
 	</div>
