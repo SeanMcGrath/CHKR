@@ -3,16 +3,77 @@
 	line-height: 2em;
 
 	&.editable {
-		height: 70px;
+		.edit {
+			opacity: 1;
+		}
+
+		.priority-edit {
+			float: right;
+			display: inline-block;
+			line-height: 2em;
+			vertical-align: middle;
+
+			button {
+				font-size: 1em;
+				margin-right: 5px;
+				vertical-align: middle;
+
+				&.set-blue,
+				&.set-purple,
+				&.set-green,
+				&.set-red {
+					margin-right: 0px;
+				}
+
+				&.set-blue {
+					color: blue;
+				}
+
+				&.set-purple {
+					color: $brand-accent;
+				}
+
+				&.set-red {
+					color: red;
+				}
+
+				&.set-green {
+					color: green;
+				}
+
+				&.set-white {
+					color: white;
+					margin-right: 1em;
+				}
+			}
+
+
+		}
 	}
 
 	&.done {
-		background-color: rgba(0,0,0,0.2);
+		background-color: rgba(0,0,0,0.2) !important;
 		color: rgba(0,0,0,0.5);
 
 		.check {
 			color: rgba(0,0,0,0.5);
 		}
+	}
+
+	&.blue {
+		background-color: rgba(0,0,255,0.3);
+	}
+
+	&.red {
+		background-color: rgba(255,0,0,0.3);
+	}
+
+	&.green {
+		background-color: rgba(0,255,0,0.3);
+	}
+
+	&.purple {
+		background-color: rgba(103,58,183,0.3);
 	}
 
 	.glyphicon {
@@ -30,6 +91,10 @@
 		padding: 0px;
 		margin: 0px 10px 0px 0px;
 		vertical-align: middle;
+
+		&:hover {
+			opacity: 0.7;
+		}
 
 		span {
 			line-height: 2em;
@@ -49,16 +114,20 @@
 		&.delete {
 			float: right;
 
-			&:hover {
-				opacity: 0.7;
-			}
 		}
 	}
+
+	.date-input {
+		max-width: 10em;
+		display: inline-block;
+	}
+	
 }
 
 .task-name {
 	padding-left: 20px;
 	vertical-align: middle;
+	line-height: 2em;
 }
 
 .task-form {

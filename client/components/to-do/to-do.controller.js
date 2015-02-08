@@ -5,10 +5,10 @@ function generateUUID(){
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = (d + Math.random()*16)%16 | 0;
         d = Math.floor(d/16);
-        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+        return (c==='x' ? r : (r&0x3|0x8)).toString(16);
     });
     return uuid;
-};
+}
 
 angular.module('chkrApp')
   .controller('ToDoCtrl', function ($scope, $http, Auth) {
@@ -17,11 +17,15 @@ angular.module('chkrApp')
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.todos = Auth.getCurrentUser().todos;
 
+    for (var i=0;i<$scope.todos.length;i++){
+        $scope.todos[i].editable = false;
+    }
+
     $scope.addTodo = function() {
     	if($scope.newTodo === ''){
     		return;
     	}
-    	var nt = { name: $scope.newTodo, id: generateUUID(), done: false};
+    	var nt = { name: $scope.newTodo, id: generateUUID(), done: false, color: ''};
         if ($scope.todos === undefined){
             $scope.todos = [];
         }
@@ -46,16 +50,20 @@ angular.module('chkrApp')
 			});
     };
 
-    $scope.toggleDone = function(todo) {
-    	for (var i=0; i < $scope.todos.length; i++){
-    		if (todo.id === $scope.todos[i].id) {
-    			$scope.todos[i].done = !$scope.todos[i].done;
-    			break;
-    		}
-    	}
-    	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/todos', {todos: $scope.todos})
-    		.success(function() {
-    			console.log('Updated todos.');
-    		});
+    $scope.updateTodos = function() {
+        $http.post('/api/users/' + Auth.getCurrentUser()._id + '/todos', {todos: $scope.todos})
+            .success(function() {
+                console.log('Updated todos.');
+            });
     };
+
+    $scope.vm = {
+        message: "Bootstrap DateTimePicker Directive",
+        dateTime: {}
+    };
+
+    $scope.$on('emit:dateTimePicker', function (e, value) {
+       $scope.vm.dateTime = value.dateTime;
+       console.log(value);
+    });
   });

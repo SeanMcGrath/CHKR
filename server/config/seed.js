@@ -23,7 +23,9 @@ User.find({}).remove(function() {
       id: 'default2',
       name: 'Go to Doctor',
       done: false,
-      editable: false
+      editable: false,
+      color: 'white',
+      date: ''
     }]
   }, {
     provider: 'local',

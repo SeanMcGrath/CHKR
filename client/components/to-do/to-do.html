@@ -1,19 +1,46 @@
 <div ng-controller='ToDoCtrl'>
 	<h1>To Do</h1>
 	<div class="row task-list">
-		<li class="nav nav-tabs col-md-12 task" ng-class="{done: todo.done, editable: todo.editable}" ng-repeat="todo in todos">
-      <button type="button" class="check" ng-click="toggleDone(todo)">
+		<li class="nav nav-tabs col-md-12 task" ng-class="{done: todo.done, editable: todo.editable, red: todo.color === 'red', blue: todo.color === 'blue', green: todo.color === 'green', purple: todo.color === 'purple'}" ng-repeat="todo in todos">
+      <button type="button" class="check" ng-click="todo.done = !todo.done; todo.editable = false; updateTodos()">
         <span class="glyphicon glyphicon-ok"></span>
       </button>
       <span class="task-name">{{todo.name}}</span>
+      <span>{{todo.date}}</span>
+      <div class="date-input" ng-show="todo.editable">
+        <input type='text' placeholder="{{todo.date}}" ng-model='todo.date' class="form-control" id="datetimepicker" />
+        </span>
+      </div>
       <button type="button" class="delete" ng-click='removeTodo(todo)'>
         <span class="glyphicon glyphicon-trash"></span>
       </button>
-      <button type="button" class="edit" ng-click="todo.editable = !todo.editable">
+      <button type="button" class="edit" ng-click="todo.editable = !todo.editable" ng-hide="todo.done">
         <span class="glyphicon glyphicon-edit"></span>
       </button>
-      <div class='task-edit' ng-class="{show: todo.editable}">
-      </div>
+      <span class="priority-edit" ng-show="todo.editable && !todo.done">
+        <button class="set-blue" ng-click="todo.color = 'blue'; updateTodos()">
+          <span class="glyphicon glyphicon-stop"></span>
+        </button>
+        <button class="set-red" ng-click="todo.color = 'red'; updateTodos()">
+          <span class="glyphicon glyphicon-stop"></span>
+        </button>
+        <button class="set-green" ng-click="todo.color = 'green'; updateTodos()">
+          <span class="glyphicon glyphicon-stop"></span>
+        </button>
+        <button class="set-purple" ng-click="todo.color = 'purple'; updateTodos()">
+          <span class="glyphicon glyphicon-stop"></span>
+        </button>
+        <button class="set-white" ng-click="todo.color = ''; updateTodos()">
+          <span class="glyphicon glyphicon-stop"></span>
+        </button>
+      </span>
+      <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker').datetimepicker({
+              format: 'MM/DD/YYYY'
+            });
+        });
+      </script>
     </li>
 	</div>
     <form class="task-form">
