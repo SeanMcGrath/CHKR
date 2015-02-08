@@ -2,18 +2,19 @@
 	<h1>Daily Tasks</h1>
 	<ul class="row task-list">
 		<li class="nav nav-tabs col-lg-12 task" ng-class="{done: daily.done, editable: daily.editable}" ng-repeat="daily in dailies">
-      <span class="task-name">{{daily.name}}</span>
-      <button type="button" class="close check" ng-click="toggleDone(daily)">
+      <button type="button" class="check" ng-click="toggleDone(daily)">
         <span class="glyphicon glyphicon-ok"></span>
       </button>
-      <button type="button" class="close edit" ng-click="daily.editable = !daily.editable">
+      <span class="task-name">{{daily.name}}</span>
+      <button type="button" class="delete" ng-click='removeDaily(daily)'>
+        <span class="glyphicon glyphicon-trash"></span>
+      </button>
+      <button type="button" class="edit" ng-click="daily.editable = !daily.editable">
         <span class="glyphicon glyphicon-edit"></span>
       </button>
       <br>
       <div class='task-edit' ng-class="{show: daily.editable}">
-        <button type="button" class="close" ng-click='removeDaily(daily)' ng-show="daily.editable">
-          <span class="glyphicon glyphicon-trash"></span>
-        </button>
+        
       </div>
     </li>
     </ul>

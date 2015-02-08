@@ -2,17 +2,17 @@
 	<h1>To Do</h1>
 	<div class="row task-list">
 		<li class="nav nav-tabs col-md-12 task" ng-class="{done: todo.done, editable: todo.editable}" ng-repeat="todo in todos">
-      <span class="task-name">{{todo.name}}</span>
-      <button type="button" class="close check" ng-click="toggleDone(todo)">
+      <button type="button" class="check" ng-click="toggleDone(todo)">
         <span class="glyphicon glyphicon-ok"></span>
       </button>
-      <button type="button" class="close edit" ng-click="todo.editable = !todo.editable">
+      <span class="task-name">{{todo.name}}</span>
+      <button type="button" class="delete" ng-click='removeTodo(todo)'>
+        <span class="glyphicon glyphicon-trash"></span>
+      </button>
+      <button type="button" class="edit" ng-click="todo.editable = !todo.editable">
         <span class="glyphicon glyphicon-edit"></span>
       </button>
       <div class='task-edit' ng-class="{show: todo.editable}">
-        <button type="button" class="close" ng-click='removeTodo(todo)' ng-show="todo.editable">
-          <span class="glyphicon glyphicon-trash"></span>
-        </button>
       </div>
     </li>
 	</div>
