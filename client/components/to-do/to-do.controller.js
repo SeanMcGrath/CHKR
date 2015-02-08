@@ -1,14 +1,14 @@
 'use strict';
 
-// Counter functions to generate sequential IDs
-function makeCounter() {
-    var i = 0;
-    return function() {
-        return i++;
-    };
-}
-
-var todoID = makeCounter();
+function generateUUID(){
+    var d = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (d + Math.random()*16)%16 | 0;
+        d = Math.floor(d/16);
+        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+    });
+    return uuid;
+};
 
 angular.module('chkrApp')
   .controller('ToDoCtrl', function ($scope, $http, Auth) {
@@ -21,12 +21,15 @@ angular.module('chkrApp')
     	if($scope.newTodo === ''){
     		return;
     	}
-    	var nd = { name: $scope.newTodo, id: todoID(), done: false};
-    	$scope.todos.push(nd);
+    	var nt = { name: $scope.newTodo, id: generateUUID(), done: false};
+        if ($scope.todos === undefined){
+            $scope.todos = [];
+        }
+    	$scope.todos.push(nt);
 		$scope.newTodo = '';
     	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/todos', {todos: $scope.todos})
     		.success(function(){
-    			console.log('Added todo.');
+    			console.log('Added todo ' + nt.id);
     		});
     };
 
@@ -39,7 +42,7 @@ angular.module('chkrApp')
 		}
 		$http.post('api/users/' + Auth.getCurrentUser()._id + '/todos', {todos: $scope.todos})
 			.success(function() {
-				console.log('Removed Todo');
+				console.log('Removed Todo ' + todo.id);
 			});
     };
 
@@ -55,13 +58,4 @@ angular.module('chkrApp')
     			console.log('Updated todos.');
     		});
     };
-
-    $scope.toggleEdit = function(todo) {
-        for (var i=0; i < $scope.todos.length; i++){
-            if (todo.id === $scope.todos[i].id) {
-                $scope.todos[i].editable = !$scope.todos[i].editable;
-                break;
-            }
-        }
-    }
   });
