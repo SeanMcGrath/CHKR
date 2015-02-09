@@ -19,6 +19,7 @@ angular.module('chkrApp')
 
     for (var i=0;i<$scope.todos.length;i++){
         $scope.todos[i].editable = false;
+        $scope.todos[i].calOpen = false;
     }
 
     $scope.addTodo = function() {
@@ -86,6 +87,5 @@ angular.module('chkrApp')
         startingDay: 1
     };
 
-    $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-    $scope.format = $scope.formats[0];
+    $scope.format = 'shortDate';
   });

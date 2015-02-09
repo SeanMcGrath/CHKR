@@ -7,7 +7,7 @@
 			opacity: 1;
 		}
 
-		.priority-edit {
+		.color-edit {
 			float: right;
 			display: inline-block;
 			line-height: 2em;
@@ -118,8 +118,24 @@
 	}
 
 	.date-input {
-		max-width: 10em;
 		display: inline-block;
+		line-height: 2em;
+		max-width: 12em;
+
+		input{
+			vertical-align: middle;
+			padding: 3px 0px;
+			margin: 0px;
+			margin-bottom: -1px;
+			text-align: center;
+			display: inline-block;
+			max-width: 6em;
+			border-radius: 0px;
+			box-shadow: none;
+			height: 60%;
+			margin-left: 10px;
+		}
+
 	}
 	
 }
