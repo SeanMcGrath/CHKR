@@ -6,10 +6,10 @@
         <span class="glyphicon glyphicon-ok"></span>
       </button>
       <span class="task-name">{{todo.name}}</span>
-      <span>{{todo.date}}</span>
+      <span class="task-date" ng-hide="todo.editable" style="margin-left: 10px;">{{todo.date | date:'shortDate'}}</span>
       <div class="date-input" ng-show="todo.editable">
-        <input type='text' placeholder="{{todo.date}}" ng-model='todo.date' class="form-control" id="datetimepicker" />
-        </span>
+        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="todo.date" is-open="opened" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-click="open($event)"/>
+        <span class="input-group-btn">
       </div>
       <button type="button" class="delete" ng-click='removeTodo(todo)'>
         <span class="glyphicon glyphicon-trash"></span>
@@ -34,13 +34,6 @@
           <span class="glyphicon glyphicon-stop"></span>
         </button>
       </span>
-      <script type="text/javascript">
-        $(function () {
-            $('#datetimepicker').datetimepicker({
-              format: 'MM/DD/YYYY'
-            });
-        });
-      </script>
     </li>
 	</div>
     <form class="task-form">
