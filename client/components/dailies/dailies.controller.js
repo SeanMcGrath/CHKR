@@ -1,4 +1,5 @@
 'use strict';
+/*jshint bitwise: false*/
 
 function generateUUID(){
     var d = new Date().getTime();

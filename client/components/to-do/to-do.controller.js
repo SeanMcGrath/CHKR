@@ -1,4 +1,5 @@
 'use strict';
+/*jshint bitwise: false*/
 
 function generateUUID(){
     var d = new Date().getTime();
@@ -15,7 +16,7 @@ angular.module('chkrApp')
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
-    $scope.todos = Auth.getCurrentUser().todos;
+    $scope.todos = Auth.getCurrentUser().todos || [];
 
     for (var i=0;i<$scope.todos.length;i++){
         $scope.todos[i].editable = false;
@@ -67,20 +68,10 @@ angular.module('chkrApp')
         $scope.dt = null;
     };
 
-    // Disable weekend selection
-    $scope.disabled = function(date, mode) {
-    };
-
     $scope.toggleMin = function() {
         $scope.minDate = $scope.minDate ? null : new Date();
     };
     $scope.toggleMin();
-
-    $scope.open = function($event) {
-        $event.preventDefault();
-        $event.stopPropagation();
-        $scope.opened = true;
-    };
 
     $scope.dateOptions = {
         formatYear: 'yy',
