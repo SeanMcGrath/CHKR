@@ -5,6 +5,23 @@
 	&.editable {
 		.edit {
 			opacity: 1;
+
+		}
+
+		input{
+			vertical-align: middle;
+			padding: 3px 0px;
+			text-align: center;
+			display: inline-block;
+			max-width: 10em;
+			border-radius: 0px;
+			box-shadow: none;
+			height: 60%;
+			margin-left: 10px;
+
+			@media (max-width: 768px) {
+				max-width: 8em;
+			}
 		}
 
 		.color-edit {
@@ -12,6 +29,10 @@
 			display: inline-block;
 			line-height: 2em;
 			vertical-align: middle;
+
+			@media (max-width: 768px) {
+				margin-right: 0px;
+			}
 
 			button {
 				font-size: 1em;
@@ -23,6 +44,11 @@
 				&.set-green,
 				&.set-red {
 					margin-right: 0px;
+
+					@media (max-width: 768px){
+						margin-left: -5px;
+						padding: 0px;
+					}
 				}
 
 				&.set-blue {
@@ -44,6 +70,10 @@
 				&.set-white {
 					color: white;
 					margin-right: 1em;
+
+					@media (max-width: 768px) {
+						margin-right: 4px;
+					}
 				}
 			}
 
@@ -125,8 +155,6 @@
 		input{
 			vertical-align: middle;
 			padding: 3px 0px;
-			margin: 0px;
-			margin-bottom: -1px;
 			text-align: center;
 			display: inline-block;
 			max-width: 6em;
