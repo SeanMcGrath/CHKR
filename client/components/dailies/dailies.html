@@ -3,7 +3,8 @@
 	<ul class="row task-list">
 		<li class="nav nav-tabs col-lg-12 task" ng-class="{done: daily.done, editable: daily.editable}" ng-repeat="daily in dailies">
       <button type="button" class="check" ng-click="daily.done = !daily.done; daily.editable = false; updateDailies()">
-        <span class="glyphicon glyphicon-ok"></span>
+        <span class="glyphicon glyphicon-check" ng-show="daily.done"></span>
+        <span class="glyphicon glyphicon-unchecked" ng-hide="daily.done"></span>
       </button>
       <span class="task-name">{{daily.name}}</span>
       <button type="button" class="delete" ng-click='removeDaily(daily)'>

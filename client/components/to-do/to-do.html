@@ -3,7 +3,8 @@
 	<div class="row task-list">
 		<li class="nav nav-tabs col-md-12 task" ng-class="{done: todo.done, editable: todo.editable, red: todo.color === 'red', blue: todo.color === 'blue', green: todo.color === 'green', purple: todo.color === 'purple'}" ng-repeat="todo in todos">
       <button type="button" class="check" ng-click="todo.done = !todo.done; todo.editable = false; updateTodos()">
-        <span class="glyphicon glyphicon-ok"></span>
+        <span class="glyphicon glyphicon-check" ng-show="todo.done"></span>
+        <span class="glyphicon glyphicon-unchecked" ng-hide="todo.done"></span>
       </button>
       <input type="text" class="form-control" ng-model="todo.name" ng-show="todo.editable"/>
       <span class="task-name" ng-hide="todo.editable">{{todo.name}}</span>
