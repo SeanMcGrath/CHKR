@@ -8,19 +8,37 @@
 
 		}
 
-		input{
+		.date-input {
+			display: inline-block;
+			line-height: 2em;
+			max-width: 4em;
+
+			input{
+				text-align: center;
+				display: inline-block;
+				max-width: 4em;
+			}
+
+		}
+
+		input {
 			vertical-align: middle;
-			padding: 3px 0px;
-			text-align: center;
+			padding: 2px 2px;
 			display: inline-block;
 			max-width: 10em;
 			border-radius: 0px;
+			border-width: 0px 0px 1px 0px;
 			box-shadow: none;
 			height: 60%;
-			margin-left: 10px;
+			margin-left: 12px;
+
+			&:focus {
+				border-color: $brand-accent;
+			}
 
 			@media (max-width: 768px) {
 				max-width: 8em;
+				margin-left: 8px;
 			}
 		}
 
@@ -109,6 +127,7 @@
 	.glyphicon {
 		font-size: 18px;
 		vertical-align: middle;
+		top: 0px;
 	}
 
 	button {
@@ -131,7 +150,7 @@
 		}
 
 		&.check {
-			margin: 0px 0px 0px 10px;
+			margin: 0px 0px 0px 15px;
 		}
 
 		&.edit,
@@ -140,31 +159,11 @@
 
 		}
 	}
-
-	.date-input {
-		display: inline-block;
-		line-height: 2em;
-		max-width: 12em;
-
-		input{
-			vertical-align: middle;
-			padding: 3px 0px;
-			text-align: center;
-			display: inline-block;
-			max-width: 6em;
-			border-radius: 0px;
-			box-shadow: none;
-			height: 60%;
-			margin-left: 10px;
-		}
-
-	}
-	
 }
 
 .task-name,
 .task-date {
-	padding-left: 20px;
+	padding-left: 15px;
 	vertical-align: middle;
 	line-height: 2em;
 }
