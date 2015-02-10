@@ -1,18 +1,36 @@
 <div ng-controller='DailiesCtrl'>
 	<h1>Daily Tasks</h1>
 	<ul class="row task-list">
-		<li class="nav nav-tabs col-lg-12 task" ng-class="{done: daily.done, editable: daily.editable}" ng-repeat="daily in dailies">
+		<li class="nav nav-tabs col-lg-12 task" ng-class="{done: daily.done, editable: daily.editable, red: daily.color === 'red', blue: daily.color === 'blue', green: daily.color === 'green', purple: daily.color === 'purple'}" ng-repeat="daily in dailies">
       <button type="button" class="check" ng-click="daily.done = !daily.done; daily.editable = false; updateDailies()">
         <span class="glyphicon glyphicon-check" ng-show="daily.done"></span>
         <span class="glyphicon glyphicon-unchecked" ng-hide="daily.done"></span>
       </button>
-      <span class="task-name">{{daily.name}}</span>
+      <input type="text" class="form-control" ng-model="daily.name" ng-show="daily.editable"/>
+      <span class="task-name" ng-hide="daily.editable">{{daily.name}}</span>
       <button type="button" class="delete" ng-click='removeDaily(daily)'>
         <span class="glyphicon glyphicon-trash"></span>
       </button>
       <button type="button" class="edit" ng-click="daily.editable = !daily.editable">
         <span class="glyphicon glyphicon-edit"></span>
       </button>
+      <span class="color-edit" ng-show="daily.editable && !daily.done">
+        <button class="set-blue" ng-click="daily.color = 'blue'; updateDailies()">
+          <span class="glyphicon glyphicon-stop"></span>
+        </button>
+        <button class="set-red" ng-click="daily.color = 'red'; updateDailies()">
+          <span class="glyphicon glyphicon-stop"></span>
+        </button>
+        <button class="set-green" ng-click="daily.color = 'green'; updateDailies()">
+          <span class="glyphicon glyphicon-stop"></span>
+        </button>
+        <button class="set-purple" ng-click="daily.color = 'purple'; updateDailies()">
+          <span class="glyphicon glyphicon-stop"></span>
+        </button>
+        <button class="set-white" ng-click="daily.color = ''; updateDailies()">
+          <span class="glyphicon glyphicon-stop"></span>
+        </button>
+      </span>
     </li>
     </ul>
     <form class="task-form">
