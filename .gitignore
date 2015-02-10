@@ -6,3 +6,4 @@ public
 client/bower_components
 dist
 *.log
+local.env.js
