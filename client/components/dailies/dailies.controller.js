@@ -11,6 +11,37 @@ function generateUUID(){
     return uuid;
 }
 
+var daysOfWeek = [
+    {
+        day: 'Su',
+        bool: true
+    },
+    {
+        day: 'M',
+        bool: true
+    },
+    {
+        day: 'Tu',
+        bool: true
+    },
+    {
+        day: 'W',
+        bool: true
+    },
+    {
+        day: 'Th',
+        bool: true
+    },
+    {
+        day: 'F',
+        bool: true
+    },
+    {
+        day: 'Sa',
+        bool: true
+    }
+]
+
 angular.module('chkrApp')
   .controller('DailiesCtrl', function ($scope, $http, Auth) {
     $scope.isLoggedIn = Auth.isLoggedIn;
@@ -25,7 +56,7 @@ angular.module('chkrApp')
     	if ($scope.dailies === undefined){
 			$scope.dailies = [];
 		}
-    	var nd = { name: $scope.newDaily, id: generateUUID(), done: false, editable: false, color: "white"};
+    	var nd = { name: $scope.newDaily, id: generateUUID(), done: false, editable: false, color: "white", days: daysOfWeek};
     	$scope.dailies.push(nd);
 		$scope.newDaily = '';
     	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/dailies', {dailies: $scope.dailies})
@@ -53,4 +84,8 @@ angular.module('chkrApp')
                 console.log('Updated dailies.');
             }); 
     };
+
+    $scope.dayClick = function(day) {
+        console.log(day);
+    }
   });
