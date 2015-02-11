@@ -11,36 +11,15 @@ function generateUUID(){
     return uuid;
 }
 
-var daysOfWeek = [
-    {
-        day: 'Su',
-        bool: true
-    },
-    {
-        day: 'M',
-        bool: true
-    },
-    {
-        day: 'Tu',
-        bool: true
-    },
-    {
-        day: 'W',
-        bool: true
-    },
-    {
-        day: 'Th',
-        bool: true
-    },
-    {
-        day: 'F',
-        bool: true
-    },
-    {
-        day: 'Sa',
-        bool: true
-    }
-]
+var daysOfWeek = {
+    Su: true,
+    M: true,
+    Tu: true,
+    W: true,
+    Th: true,
+    F: true,
+    Sa: true
+}
 
 angular.module('chkrApp')
   .controller('DailiesCtrl', function ($scope, $http, Auth) {
@@ -48,6 +27,10 @@ angular.module('chkrApp')
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.dailies = Auth.getCurrentUser().dailies;
+
+    for (var i=0;i<$scope.dailies.length;i++){
+        $scope.dailies[i].editable = false;
+    }
     
     $scope.addDaily = function() {
     	if($scope.newDaily === ''){

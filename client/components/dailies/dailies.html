@@ -8,8 +8,14 @@
       </button>
       <input type="text" class="form-control" ng-model="daily.name" ng-show="daily.editable"/>
       <span class="task-name" ng-hide="daily.editable">{{daily.name}}</span>
-      <div class="btn-group">
-        <label ng-repeat="day in daily.days" class="btn btn-primary" ng-model="day.bool" ng-click="day.bool = !day.bool; dayClick(day)" btn-checkbox>{{day.day}}</label>
+      <div class="btn-group" ng-show="daily.editable">
+        <label class="btn btn-primary" ng-model="daily.days.Su" ng-click="updateDailies()" btn-checkbox>Su</label>
+        <label class="btn btn-primary" ng-model="daily.days.M" ng-click="updateDailies()" btn-checkbox>M</label>
+        <label class="btn btn-primary" ng-model="daily.days.Tu" ng-click="updateDailies()" btn-checkbox>Tu</label>
+        <label class="btn btn-primary" ng-model="daily.days.W" ng-click="updateDailies()" btn-checkbox>W</label>
+        <label class="btn btn-primary" ng-model="daily.days.Th" ng-click="updateDailies()" btn-checkbox>Th</label>
+        <label class="btn btn-primary" ng-model="daily.days.F" ng-click="updateDailies()" btn-checkbox>F</label>
+        <label class="btn btn-primary" ng-model="daily.days.Sa" ng-click="updateDailies()" btn-checkbox>Sa</label>
       </div>
       <button type="button" class="delete" ng-click='removeDaily(daily)'>
         <span class="glyphicon glyphicon-trash"></span>
