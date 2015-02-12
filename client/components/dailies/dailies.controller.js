@@ -18,7 +18,7 @@ var daysOfWeek = {
     W: true,
     Th: true,
     F: true,
-    Sa: true
+    Sa: true,
 }
 
 angular.module('chkrApp')

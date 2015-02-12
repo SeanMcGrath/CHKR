@@ -8,19 +8,19 @@
       </button>
       <input type="text" class="form-control" ng-model="daily.name" ng-show="daily.editable"/>
       <span class="task-name" ng-hide="daily.editable">{{daily.name}}</span>
-      <div class="btn-group" ng-show="daily.editable">
-        <label class="btn btn-primary" ng-model="daily.days.Su" ng-click="updateDailies()" btn-checkbox>Su</label>
-        <label class="btn btn-primary" ng-model="daily.days.M" ng-click="updateDailies()" btn-checkbox>M</label>
-        <label class="btn btn-primary" ng-model="daily.days.Tu" ng-click="updateDailies()" btn-checkbox>Tu</label>
-        <label class="btn btn-primary" ng-model="daily.days.W" ng-click="updateDailies()" btn-checkbox>W</label>
-        <label class="btn btn-primary" ng-model="daily.days.Th" ng-click="updateDailies()" btn-checkbox>Th</label>
-        <label class="btn btn-primary" ng-model="daily.days.F" ng-click="updateDailies()" btn-checkbox>F</label>
-        <label class="btn btn-primary" ng-model="daily.days.Sa" ng-click="updateDailies()" btn-checkbox>Sa</label>
+      <div class="btn-group day-select" ng-show="daily.editable">
+        <label class="btn btn-primary" ng-model="daily.days.Su" ng-click="$timeout(updateDailies,50)" ng-class="{active: daily.days.Su}" btn-checkbox>Su</label>
+        <label class="btn btn-primary" ng-model="daily.days.M" ng-click="updateDailies()" ng-class="{active: daily.days.M}" btn-checkbox>M</label>
+        <label class="btn btn-primary" ng-model="daily.days.Tu" ng-click="updateDailies()" ng-class="{active: daily.days.Tu}" btn-checkbox>Tu</label>
+        <label class="btn btn-primary" ng-model="daily.days.W" ng-click="updateDailies()" ng-class="{active: daily.days.W}" btn-checkbox>W</label>
+        <label class="btn btn-primary" ng-model="daily.days.Th" ng-click="updateDailies()" ng-class="{active: daily.days.Th}" btn-checkbox>Th</label>
+        <label class="btn btn-primary" ng-model="daily.days.F" ng-click="updateDailies()" ng-class="{active: daily.days.F}" btn-checkbox>F</label>
+        <label class="btn btn-primary" ng-model="daily.days.Sa" ng-click="updateDailies()" ng-class="{active: daily.days.Sa}" btn-checkbox>Sa</label>
       </div>
       <button type="button" class="delete" ng-click='removeDaily(daily)'>
         <span class="glyphicon glyphicon-trash"></span>
       </button>
-      <button type="button" class="edit" ng-click="daily.editable = !daily.editable">
+      <button type="button" class="edit" ng-click="daily.editable = !daily.editable; updateDailies()">
         <span class="glyphicon glyphicon-edit"></span>
       </button>
       <span class="color-edit" ng-show="daily.editable && !daily.done">

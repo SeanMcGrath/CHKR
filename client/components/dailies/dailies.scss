@@ -21,6 +21,28 @@
 
 		}
 
+		.day-select {
+
+			margin-left: 5px;
+			display: inline-block;
+
+			label {
+				text-align: center;
+				width: 1.3em;
+				margin: 0px;
+				padding: 2px 0px;
+				background: none;
+				color: black;
+				border: none;
+				box-shadow: none;
+				opacity: 0.5;
+
+				&.active {
+					opacity: 1;
+				}
+			}
+		}
+
 		input {
 			background: rgba(255,255,255,.5);
 			vertical-align: middle;
