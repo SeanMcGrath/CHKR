@@ -15,6 +15,7 @@ router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 router.post('/:id/todos', auth.isAuthenticated(), controller.updateTodos);
 router.post('/:id/dailies', auth.isAuthenticated(), controller.updateDailies);
+router.post('/resetDailies', controller.resetDailies);
 
 
 module.exports = router;

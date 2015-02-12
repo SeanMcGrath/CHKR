@@ -126,6 +126,20 @@ exports.updateTodos = function(req,res,next) {
   });
 };
 
+// resets dailies to undone state if needed
+exports.resetDailies = function(req,res) {
+  User.find({}, function(err, users) {
+    if (err) throw err;
+    users.foreach(
+      function(user){
+        user.dailies.foreach(function(daily){
+          daily.done = false;
+        });
+      }
+    );
+  });
+};
+
 function handleError(res, err) {
   return res.send(500, err);
 }

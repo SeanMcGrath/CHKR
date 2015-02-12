@@ -11,14 +11,17 @@ function generateUUID(){
     return uuid;
 }
 
-var daysOfWeek = {
-    Su: true,
-    M: true,
-    Tu: true,
-    W: true,
-    Th: true,
-    F: true,
-    Sa: true,
+function blankWeek() {
+
+    return {
+        Su: true,
+        M: true,
+        Tu: true,
+        W: true,
+        Th: true,
+        F: true,
+        Sa: true,
+    }
 }
 
 angular.module('chkrApp')
@@ -39,7 +42,7 @@ angular.module('chkrApp')
     	if ($scope.dailies === undefined){
 			$scope.dailies = [];
 		}
-    	var nd = { name: $scope.newDaily, id: generateUUID(), done: false, editable: false, color: "white", days: daysOfWeek};
+    	var nd = { name: $scope.newDaily, id: generateUUID(), done: false, editable: false, color: "white", days: blankWeek()};
     	$scope.dailies.push(nd);
 		$scope.newDaily = '';
     	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/dailies', {dailies: $scope.dailies})
