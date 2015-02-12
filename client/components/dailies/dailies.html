@@ -9,7 +9,7 @@
       <input type="text" class="form-control" ng-model="daily.name" ng-show="daily.editable"/>
       <span class="task-name" ng-hide="daily.editable">{{daily.name}}</span>
       <div class="btn-group day-select" ng-show="daily.editable">
-        <label class="btn btn-primary" ng-model="daily.days.Su" ng-click="$timeout(updateDailies,50)" ng-class="{active: daily.days.Su}" btn-checkbox>Su</label>
+        <label class="btn btn-primary" ng-model="daily.days.Su" ng-click="updateDailies()" ng-class="{active: daily.days.Su}" btn-checkbox>Su</label>
         <label class="btn btn-primary" ng-model="daily.days.M" ng-click="updateDailies()" ng-class="{active: daily.days.M}" btn-checkbox>M</label>
         <label class="btn btn-primary" ng-model="daily.days.Tu" ng-click="updateDailies()" ng-class="{active: daily.days.Tu}" btn-checkbox>Tu</label>
         <label class="btn btn-primary" ng-model="daily.days.W" ng-click="updateDailies()" ng-class="{active: daily.days.W}" btn-checkbox>W</label>
