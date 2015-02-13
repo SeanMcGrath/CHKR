@@ -128,15 +128,29 @@ exports.updateTodos = function(req,res,next) {
 
 // resets dailies to undone state if needed
 exports.resetDailies = function(req,res) {
+
+  var reset = function(user) {
+    for (var i=0;i<user.dailies.length;i++){
+      user.dailies[i].done=false;
+    }
+    user.markModified('dailies');
+    user.save(function(err){
+      if(!err) {
+        res.send(200);
+      }
+      else {
+        console.log(err);
+        res.send(500);
+      }
+    });
+  }
+
   User.find({}, function(err, users) {
     if (err) throw err;
-    users.foreach(
-      function(user){
-        user.dailies.foreach(function(daily){
-          daily.done = false;
-        });
-      }
-    );
+    for(var i = 0;i<users.length;i++) {
+      reset(users[i]);
+    }
+    res.send(200);
   });
 };
 

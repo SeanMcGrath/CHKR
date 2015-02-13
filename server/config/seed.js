@@ -18,6 +18,12 @@ User.find({}).remove(function() {
       name: 'Brush Teeth',
       done: false,
       editable: false
+    },
+    {
+      id: 'default2',
+      name: 'clean up',
+      done: true,
+      editable: false
     }],
     todos: [{
       id: 'default2',
