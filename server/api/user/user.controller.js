@@ -129,9 +129,36 @@ exports.updateTodos = function(req,res,next) {
 // resets dailies to undone state if needed
 exports.resetDailies = function(req,res) {
 
-  var reset = function(user) {
+  var resetUser = function(user) {
+    var day = "Su";
+    switch (new Date().getDay()) {
+      case 0:
+          day = "Su";
+          break;
+      case 1:
+          day = "M";
+          break;
+      case 2:
+          day = "Tu";
+          break;
+      case 3:
+          day = "W";
+          break;
+      case 4:
+          day = "Th";
+          break;
+      case 5:
+          day = "F";
+          break;
+      case 6:
+          day = "Sa";
+          break;
+    }
     for (var i=0;i<user.dailies.length;i++){
-      user.dailies[i].done=false;
+      if (!user.dailies[i].days[day]) {
+        user.dailies[i].done=true;
+      }
+      else user.dailies[i].done=false;
     }
     user.markModified('dailies');
     user.save(function(err){
@@ -148,7 +175,7 @@ exports.resetDailies = function(req,res) {
   User.find({}, function(err, users) {
     if (err) throw err;
     for(var i = 0;i<users.length;i++) {
-      reset(users[i]);
+      resetUser(users[i]);
     }
     res.send(200);
   });

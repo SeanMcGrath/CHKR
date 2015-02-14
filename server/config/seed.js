@@ -17,13 +17,31 @@ User.find({}).remove(function() {
       id: 'default1',
       name: 'Brush Teeth',
       done: false,
-      editable: false
+      editable: false,
+      days: {
+        Su: true,
+        M: true,
+        Tu: true,
+        W: true,
+        Th: true,
+        F: true,
+        Sa: true
+      }
     },
     {
       id: 'default2',
       name: 'clean up',
       done: true,
-      editable: false
+      editable: false,
+      days: {
+        Su: true,
+        M: true,
+        Tu: true,
+        W: true,
+        Th: true,
+        F: true,
+        Sa: true
+      }
     }],
     todos: [{
       id: 'default2',
