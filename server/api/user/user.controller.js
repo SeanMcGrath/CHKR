@@ -171,14 +171,20 @@ exports.resetDailies = function(req,res) {
       }
     });
   }
-
-  User.find({}, function(err, users) {
-    if (err) throw err;
-    for(var i = 0;i<users.length;i++) {
-      resetUser(users[i]);
-    }
-    res.send(200);
-  });
+  
+  if (req.connection.remoteAddress == "127.0.0.1") {
+      User.find({}, function(err, users) {
+	  if (err) throw err;
+	  for(var i = 0;i<users.length;i++) {
+	      resetUser(users[i]);
+	  }
+	  res.send(200);
+      });
+  }
+  else {
+      console.log("Daily reset attempted from unknown IP " + req.connection.remoteAddress);
+      res.send(401);
+  }
 };
 
 function handleError(res, err) {
