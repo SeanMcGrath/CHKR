@@ -29,7 +29,7 @@ angular.module('chkrApp')
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
-    $scope.dailies = Auth.getCurrentUser().dailies;
+    $scope.dailies = Auth.getCurrentUser().dailies || [];
 
     for (var i=0;i<$scope.dailies.length;i++){
         $scope.dailies[i].editable = false;

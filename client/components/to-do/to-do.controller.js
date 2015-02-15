@@ -32,7 +32,6 @@ angular.module('chkrApp')
             $scope.todos = [];
         }
     	$scope.todos.push(nt);
-		$scope.newTodo = '';
     	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/todos', {todos: $scope.todos})
     		.success(function(){
     			console.log('Added todo ' + nt.id);
@@ -81,9 +80,10 @@ angular.module('chkrApp')
     $scope.format = 'shortDate';
 
     $scope.sortableOptions = {
+	handle: '.handle',
 	containment: 'parent',
 	axis: 'y',
-	cursor: 'grabbing',
+	cursor: 'move',
 	opacity: 1,
 	revert: 50,
 	stop: $scope.updateTodos

@@ -2,9 +2,12 @@
 	<h1>To Do</h1>
 	<div class="row task-list" ng-model="todos" ui-sortable="sortableOptions">
 		<li class="nav nav-tabs col-md-12 task" ng-class="{done: todo.done, editable: todo.editable, red: todo.color === 'red', blue: todo.color === 'blue', green: todo.color === 'green', purple: todo.color === 'purple'}" ng-repeat="todo in todos">
+      <div class="handle">
+	<span class="fa fa-ellipsis-v"></span>
+      </div>
       <button type="button" class="check" ng-click="todo.done = !todo.done; todo.editable = false; updateTodos()">
-        <span class="glyphicon glyphicon-check" ng-show="todo.done"></span>
-        <span class="glyphicon glyphicon-unchecked" ng-hide="todo.done"></span>
+        <span class="fa fa-check-square" ng-show="todo.done"></span>
+        <span class="fa fa-square-o" ng-hide="todo.done"></span>
       </button>
       <input type="text" class="form-control" ng-model="todo.name" ng-show="todo.editable"/>
       <span class="task-name" ng-hide="todo.editable">{{todo.name}}</span>
@@ -13,26 +16,26 @@
         <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="todo.date" is-open="todo.calOpen" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" show-button-bar="false" ng-click="todo.calOpen = !todo.calOpen"/>
       </div>
       <button type="button" class="delete" ng-click='removeTodo(todo)'>
-        <span class="glyphicon glyphicon-trash"></span>
+        <span class="fa fa-trash-o"></span>
       </button>
       <button type="button" class="edit" ng-click="todo.editable = !todo.editable; updateTodos()" ng-hide="todo.done">
-        <span class="glyphicon glyphicon-edit"></span>
+        <span class="fa fa-edit"></span>
       </button>
       <span class="color-edit" ng-show="todo.editable && !todo.done">
         <button class="set-blue" ng-click="todo.color = 'blue'; updateTodos()">
-          <span class="glyphicon glyphicon-stop"></span>
+          <span class="fa fa-square"></span>
         </button>
         <button class="set-red" ng-click="todo.color = 'red'; updateTodos()">
-          <span class="glyphicon glyphicon-stop"></span>
+          <span class="fa fa-square"></span>
         </button>
         <button class="set-green" ng-click="todo.color = 'green'; updateTodos()">
-          <span class="glyphicon glyphicon-stop"></span>
+          <span class="fa fa-square"></span>
         </button>
         <button class="set-purple" ng-click="todo.color = 'purple'; updateTodos()">
-          <span class="glyphicon glyphicon-stop"></span>
+          <span class="fa fa-square"></span>
         </button>
         <button class="set-white" ng-click="todo.color = ''; updateTodos()">
-          <span class="glyphicon glyphicon-stop"></span>
+          <span class="fa fa-square"></span>
         </button>
       </span>
     </li>

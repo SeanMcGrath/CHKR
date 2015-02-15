@@ -2,7 +2,6 @@
 
 	background: rgba(255,255,255,1);
 	line-height: 2em;
-	&:hover { cursor: grabbing; }
 
 	&.editable {
 		.edit {
@@ -69,6 +68,7 @@
 		}
 
 		.color-edit {
+			height: 100%;
 			float: right;
 			display: inline-block;
 			line-height: 2em;
@@ -79,7 +79,7 @@
 			}
 
 			button {
-				font-size: 1em;
+				font-size: 18px;
 				margin-right: 5px;
 				vertical-align: middle;
 
@@ -150,15 +150,9 @@
 		background-color: rgba(103,58,183,0.3);
 	}
 
-	.glyphicon {
-		font-size: 18px;
-		vertical-align: middle;
-		top: 0px;
-	}
-
 	button {
 		outline: none;
-		font-size: 21px;
+		font-size: 18px;
 		border: none;
 		color: black;
 		opacity: 0.4;
@@ -176,14 +170,24 @@
 		}
 
 		&.check {
-			margin: 0px 0px 0px 15px;
+			margin: 0px 0px 0px 5px;
 		}
 
 		&.edit,
 		&.delete {
 			float: right;
-
 		}
+
+	}
+
+	.handle {
+		opacity: 0.4;
+		vertical-align: middle;
+		line-height: 2em;
+		font-size: 16px;
+		display: inline-block;
+		margin: 0px 0px 0px 8px;
+		cursor: move;
 	}
 }
 
@@ -202,37 +206,6 @@
 .task-list {
 	-webkit-padding-start: 15px;
 	margin-right: 10px;
-}
-
-.task-edit {
-	position: absolute;
-	bottom: 0px;
-	width: 100%;
-	height: 0px;
-	padding: 0px;
-	margin: 0;
-	display: block;
-	line-height: 40px;
-	padding-right: 18px;
-	margin-bottom: 4px;
-
-	button {
-		margin-top: 4px;
-		margin-right: 20px;
-
-		&.close {
-			color: red;
-			opacity: 0.6;
-
-			&:hover{
-				opacity: 0.9;
-			}
-		}
-	}
-
-	&.show {
-		height: 30px;
-	}
 }
 
 .btn-primary {
