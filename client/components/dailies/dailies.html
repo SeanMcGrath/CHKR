@@ -1,6 +1,6 @@
 <div ng-controller='DailiesCtrl'>
 	<h1>Daily Tasks</h1>
-	<ul class="row task-list">
+	<ul class="row task-list" ng-model="dailies" ui-sortable="sortableOptions">
 		<li class="nav nav-tabs col-lg-12 task" ng-class="{done: daily.done, editable: daily.editable, red: daily.color === 'red', blue: daily.color === 'blue', green: daily.color === 'green', purple: daily.color === 'purple'}" ng-repeat="daily in dailies">
       <button type="button" class="check" ng-click="daily.done = !daily.done; daily.editable = false; updateDailies()">
         <span class="glyphicon glyphicon-check" ng-show="daily.done"></span>

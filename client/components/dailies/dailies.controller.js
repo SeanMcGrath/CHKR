@@ -71,7 +71,14 @@ angular.module('chkrApp')
             }); 
     };
 
-    $scope.dayClick = function(day) {
-        console.log(day);
-    };
+    $scope.sortableOptions = {
+	containment: 'parent',
+	axis: 'y',
+	cursor: 'grabbing',
+	opacity: 1,
+	revert: 50,
+	stop: $scope.updateDailies
+    }
+
+
   });

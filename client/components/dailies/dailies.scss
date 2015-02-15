@@ -1,6 +1,8 @@
 .task {
 
+	background: rgba(255,255,255,1);
 	line-height: 2em;
+	&:hover { cursor: grabbing; }
 
 	&.editable {
 		.edit {
