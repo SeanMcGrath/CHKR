@@ -79,4 +79,13 @@ angular.module('chkrApp')
     };
 
     $scope.format = 'shortDate';
+
+    $scope.sortableOptions = {
+	containment: 'parent',
+	axis: 'y',
+	cursor: 'grabbing',
+	opacity: 1,
+	revert: 50,
+	stop: $scope.updateTodos
+    };
   });

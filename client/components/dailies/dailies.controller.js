@@ -78,7 +78,6 @@ angular.module('chkrApp')
 	opacity: 1,
 	revert: 50,
 	stop: $scope.updateDailies
-    }
-
+    };
 
   });
