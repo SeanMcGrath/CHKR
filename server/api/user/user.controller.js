@@ -172,7 +172,7 @@ exports.resetDailies = function(req,res) {
     });
   }
   
-  if (req.connection.remoteAddress == "127.0.0.1") {
+  if (req.connection.remoteAddress === "127.0.0.1") {
       User.find({}, function(err, users) {
 	  if (err) throw err;
 	  for(var i = 0;i<users.length;i++) {

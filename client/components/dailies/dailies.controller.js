@@ -21,7 +21,7 @@ function blankWeek() {
         Th: true,
         F: true,
         Sa: true,
-    }
+    };
 }
 
 angular.module('chkrApp')
@@ -42,7 +42,7 @@ angular.module('chkrApp')
     	if ($scope.dailies === undefined){
 			$scope.dailies = [];
 		}
-    	var nd = { name: $scope.newDaily, id: generateUUID(), done: false, editable: false, color: "white", days: blankWeek()};
+    	var nd = { name: $scope.newDaily, id: generateUUID(), done: false, editable: false, color: 'white', days: blankWeek()};
     	$scope.dailies.push(nd);
 		$scope.newDaily = '';
     	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/dailies', {dailies: $scope.dailies})
@@ -73,5 +73,5 @@ angular.module('chkrApp')
 
     $scope.dayClick = function(day) {
         console.log(day);
-    }
+    };
   });

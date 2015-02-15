@@ -8,7 +8,7 @@ module.exports = function (grunt) {
   } catch(e) {
     localConfig = {};
   }
-
+  
   // Load grunt tasks automatically, when needed
   require('jit-grunt')(grunt, {
     express: 'grunt-express-server',
@@ -540,9 +540,20 @@ module.exports = function (grunt) {
             '<%= yeoman.client %>/{app,components}/**/*.css'
           ]
         }
-      }
+      },
+    },
+
+    // Set up cron management
+    crontab: {
+      dev: {
+        namespace: '<%= pkg.name %>' + '.dev' , // this would be the default anyway 
+        cronfile: '.crontab'
+      },
     },
   });
+
+  // Load cron configuration extension
+  grunt.loadNpmTasks('grunt-crontab');
 
   // Used for delaying livereload until after server has restarted
   grunt.registerTask('wait', function () {
@@ -656,12 +667,17 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    'crontab'
   ]);
 
   grunt.registerTask('default', [
     'newer:jshint',
     'test',
     'build'
+  ]);
+  
+  grunt.registerTask('cron', [
+    'crontab'
   ]);
 };
