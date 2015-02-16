@@ -27,11 +27,12 @@ angular.module('chkrApp')
     	if($scope.newTodo === ''){
     		return;
     	}
-    	var nt = { name: $scope.newTodo, id: generateUUID(), done: false, color: ''};
+    	var nt = { name: $scope.newTodo, id: generateUUID(), done: false, color: '', date: new Date()};
         if ($scope.todos === undefined){
             $scope.todos = [];
         }
     	$scope.todos.push(nt);
+        $scope.newTodo = '';
     	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/todos', {todos: $scope.todos})
     		.success(function(){
     			console.log('Added todo ' + nt.id);
@@ -80,12 +81,12 @@ angular.module('chkrApp')
     $scope.format = 'shortDate';
 
     $scope.sortableOptions = {
-	handle: '.handle',
-	containment: 'parent',
-	axis: 'y',
-	cursor: 'move',
-	opacity: 1,
-	revert: 50,
-	stop: $scope.updateTodos
-    };
+    	handle: '.handle',
+    	containment: 'parent',
+    	axis: 'y',
+    	cursor: 'move',
+    	opacity: 1,
+    	revert: 150,
+    	stop: $scope.updateTodos
+        };
   });

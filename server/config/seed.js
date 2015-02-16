@@ -46,10 +46,10 @@ User.find({}).remove(function() {
     todos: [{
       id: 'default2',
       name: 'Go to Doctor',
+      date: new Date(),
       done: false,
       editable: false,
       color: 'white',
-      date: ''
     }]
   }, {
     provider: 'local',

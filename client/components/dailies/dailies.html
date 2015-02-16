@@ -1,10 +1,13 @@
 <div ng-controller='DailiesCtrl'>
 	<h1>Daily Tasks</h1>
-	<ul class="row task-list" ng-model="dailies" ui-sortable="sortableOptions">
+	<div class="row task-list" ng-model="dailies" ui-sortable="sortableOptions">
 		<li class="nav nav-tabs col-lg-12 task" ng-class="{done: daily.done, editable: daily.editable, red: daily.color === 'red', blue: daily.color === 'blue', green: daily.color === 'green', purple: daily.color === 'purple'}" ng-repeat="daily in dailies">
+      <div class="handle">
+        <span class="fa fa-ellipsis-v"></span>
+      </div>
       <button type="button" class="check" ng-click="daily.done = !daily.done; daily.editable = false; updateDailies()">
-        <span class="glyphicon glyphicon-check" ng-show="daily.done"></span>
-        <span class="glyphicon glyphicon-unchecked" ng-hide="daily.done"></span>
+        <span class="fa fa-check-square" ng-show="daily.done"></span>
+        <span class="fa fa-square-o" ng-hide="daily.done"></span>
       </button>
       <input type="text" class="form-control" ng-model="daily.name" ng-show="daily.editable"/>
       <span class="task-name" ng-hide="daily.editable">{{daily.name}}</span>
@@ -18,35 +21,36 @@
         <label class="btn btn-primary" ng-model="daily.days.Sa" ng-click="updateDailies()" ng-class="{active: daily.days.Sa}" btn-checkbox>Sa</label>
       </div>
       <button type="button" class="delete" ng-click='removeDaily(daily)'>
-        <span class="glyphicon glyphicon-trash"></span>
+        <span class="fa fa-trash-o"></span>
       </button>
       <button type="button" class="edit" ng-click="daily.editable = !daily.editable; updateDailies()">
-        <span class="glyphicon glyphicon-edit"></span>
+        <span class="fa fa-edit"></span>
       </button>
       <span class="color-edit" ng-show="daily.editable && !daily.done">
         <button class="set-blue" ng-click="daily.color = 'blue'; updateDailies()">
-          <span class="glyphicon glyphicon-stop"></span>
+          <span class="fa fa-square"></span>
         </button>
         <button class="set-red" ng-click="daily.color = 'red'; updateDailies()">
-          <span class="glyphicon glyphicon-stop"></span>
+          <span class="fa fa-square"></span>
         </button>
         <button class="set-green" ng-click="daily.color = 'green'; updateDailies()">
-          <span class="glyphicon glyphicon-stop"></span>
+          <span class="fa fa-square"></span>
         </button>
         <button class="set-purple" ng-click="daily.color = 'purple'; updateDailies()">
-          <span class="glyphicon glyphicon-stop"></span>
+          <span class="fa fa-square"></span>
         </button>
         <button class="set-white" ng-click="daily.color = ''; updateDailies()">
-          <span class="glyphicon glyphicon-stop"></span>
+          <span class="fa fa-square"></span>
         </button>
       </span>
     </li>
-    </ul>
+    <li class="placeholder"></li>
+    </div>
     <form class="task-form">
       <p class="input-group">
         <input type="text" class="form-control" placeholder="Add a new Daily Task" ng-model="newDaily">
         <span class="input-group-btn">
-          <button type="submit" class="btn btn-primary" ng-click="addDaily()">Add New</button>
+          <button type="submit" class="btn btn-primary" ng-click="addDaily()"><span class="fa fa-plus"></span></button>
         </span>
       </p>
     </form>

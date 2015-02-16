@@ -72,12 +72,13 @@ angular.module('chkrApp')
     };
 
     $scope.sortableOptions = {
-	containment: 'parent',
-	axis: 'y',
-	cursor: 'grabbing',
-	opacity: 1,
-	revert: 50,
-	stop: $scope.updateDailies
+        handle: '.handle',
+    	containment: 'parent',
+    	axis: 'y',
+    	cursor: 'grabbing',
+    	opacity: 1,
+    	revert: 150,
+    	stop: $scope.updateDailies
     };
 
   });

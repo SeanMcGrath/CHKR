@@ -114,6 +114,7 @@
 				&.set-white {
 					color: white;
 					margin-right: 1em;
+					opacity: 0.8;
 
 					@media (max-width: 768px) {
 						margin-right: 4px;
@@ -131,6 +132,7 @@
 
 		.check {
 			color: rgba(0,0,0,0.5);
+			margin-right: -1px;
 		}
 	}
 
@@ -199,13 +201,20 @@
 }
 
 .task-form {
-    margin-top: 20px;
+    margin-top: 0px;
     padding-bottom: 30px;
 }
 
 .task-list {
 	-webkit-padding-start: 15px;
 	margin-right: 10px;
+
+	.placeholder {
+		display: inline-block;
+		height: 20px;
+		width: 100%;
+		list-style-type: none;
+	}
 }
 
 .btn-primary {
