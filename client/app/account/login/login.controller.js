@@ -1,9 +1,13 @@
 'use strict';
 
 angular.module('chkrApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location, $window) {
+  .controller('LoginCtrl', function ($scope, Auth, $location, $window, $timeout) {
     $scope.user = {};
     $scope.errors = {};
+
+    if(Auth.isLoggedIn()){
+      $location.path('/');
+    }
 
     $scope.login = function(form) {
       $scope.submitted = true;
@@ -12,13 +16,11 @@ angular.module('chkrApp')
         Auth.login({
           email: $scope.user.email,
           password: $scope.user.password
-        })
-        .then( function() {
-          // Logged in, redirect to home
-          $location.path('/');
-        })
-        .catch( function(err) {
-          $scope.errors.other = err.message;
+        },
+        // Wait slightly ot ensure login has been processed,
+        // Otherwise main screen will redirect back to login
+        function() {
+          $timeout(function() {$location.path('/');}, 50);
         });
       }
     };
