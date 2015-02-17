@@ -17,10 +17,10 @@ angular.module('chkrApp')
           email: $scope.user.email,
           password: $scope.user.password
         },
-        // Wait slightly ot ensure login has been processed,
+        // Wait slightly to ensure login has been processed,
         // Otherwise main screen will redirect back to login
         function() {
-          $timeout(function() {$location.path('/');}, 50);
+          $timeout(function() {$location.path('/');}, 100);
         });
       }
     };

@@ -50,7 +50,10 @@ User.find({}).remove(function() {
       done: false,
       editable: false,
       color: 'white',
-    }]
+    }],
+    settings: {
+      showDailies: 'all',
+    }
   }, {
     provider: 'local',
     role: 'admin',
