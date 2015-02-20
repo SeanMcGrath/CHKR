@@ -1,9 +1,9 @@
 {
 	"jobs": [
 		{
-			"command": "curl --data '{}' localhost:9000/api/users/resetDailies",
-			"schedule": "01 0 * * *",
-			"comment": "reset dailies"
+			"command": "curl --data '{}' localhost:9000/api/users/reset",
+			"schedule": "01 3 * * *",
+			"comment": "reset dailies and todos"
 		}
 	]
 }
