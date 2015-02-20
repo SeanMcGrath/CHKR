@@ -2,10 +2,6 @@
 
 angular.module('chkrApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
-    $scope.menu = [{
-      'title': 'Home',
-      'link': '/'
-    }];
 
     $scope.isCollapsed = false;
     $scope.isLoggedIn = Auth.isLoggedIn;

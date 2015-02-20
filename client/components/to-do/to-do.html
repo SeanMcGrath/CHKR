@@ -13,7 +13,7 @@
       <span class="task-name" ng-hide="todo.editable">{{todo.name}}</span>
       <span class="task-date" ng-hide="todo.editable" style="margin-left: 10px;">{{todo.date | date:'shortDate'}}</span>
       <div class="date-input" ng-show="todo.editable">
-        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="todo.date" is-open="todo.calOpen" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" show-button-bar="false" ng-click="todo.calOpen = !todo.calOpen"/>
+        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="todo.date" value="todo.date | date:'shortDate'" is-open="todo.calOpen" min-date="minDate" datepicker-options="dateOptions" ng-required="true" close-text="Close" show-button-bar="false" ng-click="todo.calOpen = !todo.calOpen"/>
       </div>
       <button type="button" class="delete" ng-click='removeTodo(todo)'>
         <span class="fa fa-trash-o"></span>

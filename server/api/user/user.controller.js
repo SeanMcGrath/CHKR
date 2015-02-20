@@ -109,7 +109,7 @@ exports.authCallback = function(req, res, next) {
 };
 
 // update the fields in a user's existing daily.
-exports.updateDailies = function(req,res,next) {
+exports.updateDailies = function(req,res) {
   var userId = {_id: req.user._id};
   User.findOneAndUpdate(userId, req.body, function (err, user) {
     if (err) throw err;
@@ -118,7 +118,7 @@ exports.updateDailies = function(req,res,next) {
 };
 
 // update the fields in a user's existing todo.
-exports.updateTodos = function(req,res,next) {
+exports.updateTodos = function(req,res) {
   var userId = {_id: req.user._id};
   User.findOneAndUpdate(userId, req.body, function (err, user) {
     if (err) throw err;
@@ -186,6 +186,91 @@ exports.resetDailies = function(req,res) {
       res.send(401);
   }
 };
+
+//Handle todos that were completed yesterday
+exports.clearTodos = function(req,res) {
+
+  var resetUser = function(user) {
+    // For now just remove completed tasks  
+    user.todos = user.todos.filter(function(todo){return !todo.done;});
+    user.markModified('todos');
+    user.save(function(err){
+      if(err) throw err;
+    });
+  }
+
+  if(req.connection.remoteAddress === '127.0.0.1'){
+    User.find({}, function(err,users){
+      if (err) throw err;
+      for(var i = 0;i<users.length;i++) {
+	resetUser(users[i]);
+      }
+      res.send(200);
+    });
+  }
+}
+
+exports.resetUsers = function(req,res) {
+
+  var resetUser = function(user) {
+    var day = "Su";
+    switch (new Date().getDay()) {
+      case 0:
+          day = "Su";
+          break;
+      case 1:
+          day = "M";
+          break;
+      case 2:
+          day = "Tu";
+          break;
+      case 3:
+          day = "W";
+          break;
+      case 4:
+          day = "Th";
+          break;
+      case 5:
+          day = "F";
+          break;
+      case 6:
+          day = "Sa";
+          break;
+    }
+    for (var i=0;i<user.dailies.length;i++){
+      if (!user.dailies[i].days[day]) {
+        user.dailies[i].done=true;
+      }
+      else user.dailies[i].done=false;
+    }
+    user.markModified('dailies');
+    user.todos = user.todos.filter(function(todo){return !todo.done;});
+    user.markModified('todos');
+    user.save(function(err){
+      if(err) throw err;
+    });
+  }
+
+  if(req.connection.remoteAddress === '127.0.0.1'){
+
+    try {
+      User.find({}, function(err, users) {
+        if (err) throw err;
+        for(var i = 0;i<users.length;i++) {
+          resetUser(users[i]);
+        }
+        res.send(200);
+      });
+    }
+
+    catch(err) {console.log(err);}
+
+  }
+  else{
+    console.log("Daily reset attempted from unknown IP " + req.connection.remoteAddress);
+    res.send(401)
+  }
+}
 
 function handleError(res, err) {
   return res.send(500, err);
