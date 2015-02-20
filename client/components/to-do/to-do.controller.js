@@ -53,11 +53,21 @@ angular.module('chkrApp')
     };
 
     $scope.updateTodos = function() {
+
         $http.post('/api/users/' + Auth.getCurrentUser()._id + '/todos', {todos: $scope.todos})
             .success(function() {
                 console.log('Updated todos.');
             });
     };
+
+    $scope.pushToBottom = function(todo) {
+        if(todo.done){
+            $scope.todos = $scope.todos.filter(function(e){
+                return e.id !== todo.id;
+            });
+            $scope.todos.push(todo);
+        }
+    }
 
     $scope.today = function() {
         $scope.dt = new Date();
