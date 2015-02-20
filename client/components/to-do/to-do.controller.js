@@ -88,5 +88,5 @@ angular.module('chkrApp')
     	opacity: 1,
     	revert: 150,
     	stop: $scope.updateTodos
-        };
+    };
   });
