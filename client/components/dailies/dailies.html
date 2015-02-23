@@ -23,7 +23,7 @@
       <button type="button" class="delete" ng-click='removeDaily(daily)'>
         <span class="fa fa-trash-o"></span>
       </button>
-      <button type="button" class="edit" ng-click="daily.editable = !daily.editable; updateDailies()">
+      <button type="button" class="edit" ng-click="daily.editable = !daily.editable; updateDailies()" ng-hide="daily.done">
         <span class="fa fa-edit"></span>
       </button>
       <span class="color-edit" ng-show="daily.editable && !daily.done">
