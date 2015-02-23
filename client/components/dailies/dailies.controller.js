@@ -64,6 +64,21 @@ angular.module('chkrApp')
 			});
     };
 
+    $scope.sortDailies = function(cb) {
+        var dones = [];
+        var undones = [];
+        for(var i=0;i<$scope.dailies.length;i++){
+            if ($scope.dailies[i].done) {
+                dones.push($scope.dailies[i]);
+            }
+            else {
+                undones.push($scope.dailies[i]);
+            }
+        }
+        $scope.dailies = undones.concat(dones);
+        cb()
+    }
+
     $scope.updateDailies = function() {
        $http.post('/api/users/' + Auth.getCurrentUser()._id + '/dailies', {dailies: $scope.dailies})
             .success(function() {

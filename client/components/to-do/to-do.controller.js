@@ -60,13 +60,19 @@ angular.module('chkrApp')
             });
     };
 
-    $scope.pushToBottom = function(todo) {
-        if(todo.done){
-            $scope.todos = $scope.todos.filter(function(e){
-                return e.id !== todo.id;
-            });
-            $scope.todos.push(todo);
+    $scope.sortTodos = function(cb) {
+        var dones = [];
+        var undones = [];
+        for(var i=0;i<$scope.todos.length;i++){
+            if ($scope.todos[i].done) {
+                dones.push($scope.todos[i]);
+            }
+            else {
+                undones.push($scope.todos[i]);
+            }
         }
+        $scope.todos = undones.concat(dones);
+        cb()
     }
 
     $scope.today = function() {

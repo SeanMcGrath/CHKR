@@ -5,7 +5,7 @@ angular.module('chkrApp')
     $scope.errors = {};
 
     $scope.changePassword = function(form) {
-      $scope.submitted = true;
+      $scope.passwordSubmitted = true;
       if(form.$valid) {
         Auth.changePassword( $scope.user.oldPassword, $scope.user.newPassword )
         .then( function() {
