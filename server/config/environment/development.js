@@ -8,5 +8,5 @@ module.exports = {
     uri: 'mongodb://localhost/chkr-dev'
   },
 
-  seedDB: false
+  seedDB: true
 };

@@ -20,7 +20,8 @@ var UserSchema = new Schema({
   google: {},
   github: {},
   dailies: [],
-  todos: []
+  todos: [],
+  settings: {}
 });
 
 /**

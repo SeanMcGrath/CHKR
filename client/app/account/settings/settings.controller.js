@@ -3,6 +3,8 @@
 angular.module('chkrApp')
   .controller('SettingsCtrl', function ($scope, User, Auth) {
     $scope.errors = {};
+    $scope.settings = Auth.getCurrentUser().settings || {};
+    console.log(Auth.getCurrentUser());
 
     $scope.changePassword = function(form) {
       $scope.passwordSubmitted = true;

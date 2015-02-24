@@ -9,6 +9,10 @@ var User = require('../api/user/user.model');
 
 User.find({}).remove(function() {
   User.create({
+    settings: {
+      showAllDailies: true,
+      sortTasks: true
+    },
     provider: 'local',
     name: 'Test User',
     email: 'test@test.com',
@@ -51,9 +55,6 @@ User.find({}).remove(function() {
       editable: false,
       color: 'white',
     }],
-    settings: {
-      showDailies: 'all',
-    }
   }, {
     provider: 'local',
     role: 'admin',
