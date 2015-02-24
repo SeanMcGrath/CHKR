@@ -1,10 +1,16 @@
 'use strict';
 
 angular.module('chkrApp')
-  .controller('SettingsCtrl', function ($scope, User, Auth) {
+  .controller('SettingsCtrl', function ($scope, $http, User, Auth) {
     $scope.errors = {};
     $scope.settings = Auth.getCurrentUser().settings || {};
-    console.log(Auth.getCurrentUser());
+
+    $scope.updateSettings = function() {
+      $http.post('/api/users/' + Auth.getCurrentUser()._id + '/settings', {settings: $scope.settings})
+            .success(function() {
+                console.log('Updated Settings.');
+            });
+    }
 
     $scope.changePassword = function(form) {
       $scope.passwordSubmitted = true;

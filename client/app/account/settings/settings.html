@@ -39,12 +39,12 @@
       <div class="col-sm-12 col-md-4 col-md-offset-1">
         <h1>Preferences</h1>
         <label>Display only dailies that are active today:</label>
-        <button type="button" class="check" ng-click="settings.showAllDailies = !settings.showAllDailies">
-          <span class="fa fa-check-square" ng-show="settings.showAllDailies"></span>
-          <span class="fa fa-square-o" ng-hide="settings.showAllDailies"></span>
+        <button type="button" class="check" ng-click="settings.showAllDailies = !settings.showAllDailies; updateSettings()">
+          <span class="fa fa-check-square" ng-hide="settings.showAllDailies"></span>
+          <span class="fa fa-square-o" ng-show="settings.showAllDailies"></span>
         </button>
         <label>Automatically push completed tasks to bottom of list:</label>
-        <button type="button" class="check" ng-click="settings.sortTasks = !settings.sortTasks">
+        <button type="button" class="check" ng-click="settings.sortTasks = !settings.sortTasks; updateSettings()">
           <span class="fa fa-check-square" ng-show="settings.sortTasks"></span>
           <span class="fa fa-square-o" ng-hide="settings.sortTasks"></span>
         </button>
