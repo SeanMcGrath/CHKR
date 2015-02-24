@@ -13,8 +13,9 @@ router.get('/me', auth.isAuthenticated(), controller.me);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
-router.post('/:id/todos', auth.isAuthenticated(), controller.updateTodos);
-router.post('/:id/dailies', auth.isAuthenticated(), controller.updateDailies);
+router.post('/:id/todos', auth.isAuthenticated(), controller.updateUser);
+router.post('/:id/dailies', auth.isAuthenticated(), controller.updateUser);
+router.post('/:id/settings', auth.isAuthenticated(), controller.updateUser);
 router.post('/reset', controller.resetUsers);
 
 module.exports = router;

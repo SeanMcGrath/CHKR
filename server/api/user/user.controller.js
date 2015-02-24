@@ -108,23 +108,13 @@ exports.authCallback = function(req, res, next) {
   res.redirect('/');
 };
 
-// update the fields in a user's existing daily.
-exports.updateDailies = function(req,res) {
+exports.updateUser = function(req,res) {
   var userId = {_id: req.user._id};
   User.findOneAndUpdate(userId, req.body, function (err, user) {
     if (err) throw err;
     res.send(200);
   });
-};
-
-// update the fields in a user's existing todo.
-exports.updateTodos = function(req,res) {
-  var userId = {_id: req.user._id};
-  User.findOneAndUpdate(userId, req.body, function (err, user) {
-    if (err) throw err;
-    res.send(200);
-  });
-};
+}
 
 exports.resetUsers = function(req,res) {
 
