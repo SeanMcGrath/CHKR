@@ -89,6 +89,34 @@ angular.module('chkrApp')
             }); 
     };
 
+    $scope.activeToday = function(daily) {
+        var day = "Su";
+        switch (new Date().getDay()) {
+          case 0:
+              day = "Su";
+              break;
+          case 1:
+              day = "M";
+              break;
+          case 2:
+              day = "Tu";
+              break;
+          case 3:
+              day = "W";
+              break;
+          case 4:
+              day = "Th";
+              break;
+          case 5:
+              day = "F";
+              break;
+          case 6:
+              day = "Sa";
+              break;
+        }
+        return daily.days[day];
+    }
+
     $scope.sortableOptions = {
         handle: '.handle',
     	containment: 'parent',
