@@ -17,6 +17,7 @@ angular.module('chkrApp')
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.todos = Auth.getCurrentUser().todos || [];
+    $scope.settings = Auth.getCurrentUser().settings || {};
 
     for (var i=0;i<$scope.todos.length;i++){
         $scope.todos[i].editable = false;
@@ -61,17 +62,19 @@ angular.module('chkrApp')
     };
 
     $scope.sortTodos = function(cb) {
-        var dones = [];
-        var undones = [];
-        for(var i=0;i<$scope.todos.length;i++){
-            if ($scope.todos[i].done) {
-                dones.push($scope.todos[i]);
+        if($scope.settings.sortTasks){
+            var dones = [];
+            var undones = [];
+            for(var i=0;i<$scope.todos.length;i++){
+                if ($scope.todos[i].done) {
+                    dones.push($scope.todos[i]);
+                }
+                else {
+                    undones.push($scope.todos[i]);
+                }
             }
-            else {
-                undones.push($scope.todos[i]);
-            }
+            $scope.todos = undones.concat(dones);
         }
-        $scope.todos = undones.concat(dones);
         cb()
     }
 
