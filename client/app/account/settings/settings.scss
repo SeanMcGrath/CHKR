@@ -1,0 +1,32 @@
+#preferences {
+
+	.pref {
+		margin-bottom: 5px;
+		display: block;
+	}
+
+	button {
+		outline: none;
+		font-size: 18px;
+		border: none;
+		color: black;
+		opacity: 0.4;
+		background: none;
+		padding: 0px;
+		vertical-align: middle;
+		margin: 0px 40px 0px 0px;
+
+		@media (max-width: 768px) {
+			margin: 0px;
+		}
+
+		span {
+			margin: 0px;
+			padding: 0px;
+		}
+		
+		&.check {
+			float: right;
+		}
+	}
+}

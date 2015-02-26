@@ -36,18 +36,23 @@
         </form>
       </div>
 
-      <div class="col-sm-12 col-md-4 col-md-offset-1">
+      <div class="col-sm-12 col-md-4 col-md-offset-1" id="preferences">
         <h1>Preferences</h1>
+        <div class="pref">
         <label>Display only dailies that are active today:</label>
-        <button type="button" class="check" ng-click="settings.showAllDailies = !settings.showAllDailies; updateSettings()">
-          <span class="fa fa-check-square" ng-hide="settings.showAllDailies"></span>
-          <span class="fa fa-square-o" ng-show="settings.showAllDailies"></span>
-        </button>
-        <label>Automatically push completed tasks to bottom of list:</label>
-        <button type="button" class="check" ng-click="settings.sortTasks = !settings.sortTasks; updateSettings()">
-          <span class="fa fa-check-square" ng-show="settings.sortTasks"></span>
-          <span class="fa fa-square-o" ng-hide="settings.sortTasks"></span>
-        </button>
+          <button type="button" class="check" ng-click="settings.showAllDailies = !settings.showAllDailies; updateSettings()">
+            <span class="fa fa-check-square" ng-hide="settings.showAllDailies"></span>
+            <span class="fa fa-square-o" ng-show="settings.showAllDailies"></span>
+          </button>
+        </div>
+        <div class="pref">
+        <label>Push completed tasks to bottom of list:</label>
+          <button type="button" class="check" ng-click="settings.sortTasks = !settings.sortTasks; updateSettings()">
+            <span class="fa fa-check-square" ng-show="settings.sortTasks"></span>
+            <span class="fa fa-square-o" ng-hide="settings.sortTasks"></span>
+          </button>
+        </div>
+        <br>
       </div>
     </div>
 
