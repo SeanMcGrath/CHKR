@@ -10,6 +10,7 @@ angular.module('chkrApp')
 
       if(form.$valid) {
         Auth.createUser({
+          settings: { showAllDailies: true, sortTasks: true},
           name: $scope.user.name,
           email: $scope.user.email,
           password: $scope.user.password

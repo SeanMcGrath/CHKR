@@ -10,7 +10,7 @@ angular.module('chkrApp')
             .success(function() {
                 console.log('Updated Settings.');
             });
-    }
+    };
 
     $scope.changePassword = function(form) {
       $scope.passwordSubmitted = true;

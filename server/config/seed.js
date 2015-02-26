@@ -19,34 +19,110 @@ User.find({}).remove(function() {
     password: 'test',
     dailies: [{
       id: 'default1',
-      name: 'Brush Teeth',
+      name: 'Sunday',
       done: false,
       editable: false,
       days: {
         Su: true,
-        M: true,
-        Tu: true,
-        W: true,
-        Th: true,
-        F: true,
-        Sa: true
+        M: false,
+        Tu: false,
+        W: false,
+        Th: false,
+        F: false,
+        Sa: false
       }
     },
     {
       id: 'default2',
-      name: 'clean up',
-      done: true,
+      name: 'Monday',
+      done: false,
       editable: false,
       days: {
-        Su: true,
+        Su: false,
         M: true,
+        Tu: false,
+        W: false,
+        Th: false,
+        F: false,
+        Sa: false
+      }
+    },
+    {
+      id: 'default3',
+      name: 'Tuesday',
+      done: false,
+      editable: false,
+      days: {
+        Su: false,
+        M: false,
         Tu: true,
+        W: false,
+        Th: false,
+        F: false,
+        Sa: false
+      }
+    },
+    {
+      id: 'default4',
+      name: 'Wednesday',
+      done: false,
+      editable: false,
+      days: {
+        Su: false,
+        M: false,
+        Tu: false,
         W: true,
+        Th: false,
+        F: false,
+        Sa: false
+      }
+    },
+    {
+      id: 'default5',
+      name: 'Thursday',
+      done: false,
+      editable: false,
+      days: {
+        Su: false,
+        M: false,
+        Tu: false,
+        W: false,
         Th: true,
+        F: false,
+        Sa: false
+      }
+    },
+    {
+      id: 'default6',
+      name: 'Friday',
+      done: false,
+      editable: false,
+      days: {
+        Su: false,
+        M: false,
+        Tu: false,
+        W: false,
+        Th: false,
         F: true,
+        Sa: false
+      }
+    },
+    {
+      id: 'default7',
+      name: 'Saturday',
+      done: false,
+      editable: false,
+      days: {
+        Su: false,
+        M: false,
+        Tu: false,
+        W: false,
+        Th: false,
+        F: false,
         Sa: true
       }
-    }],
+    },
+    ],
     todos: [{
       id: 'default2',
       name: 'Go to Doctor',

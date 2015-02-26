@@ -75,8 +75,8 @@ angular.module('chkrApp')
             }
             $scope.todos = undones.concat(dones);
         }
-        cb()
-    }
+        cb();
+    };
 
     $scope.today = function() {
         $scope.dt = new Date();

@@ -1,6 +1,7 @@
 'use strict';
 /*jshint bitwise: false*/
 
+//Many thanks to StackOverflow
 function generateUUID(){
     var d = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -79,8 +80,8 @@ angular.module('chkrApp')
             }
             $scope.dailies = undones.concat(dones);
         }
-        cb()
-    }
+        cb();
+    };
 
     $scope.updateDailies = function() {
        $http.post('/api/users/' + Auth.getCurrentUser()._id + '/dailies', {dailies: $scope.dailies})
@@ -90,32 +91,32 @@ angular.module('chkrApp')
     };
 
     $scope.activeToday = function(daily) {
-        var day = "Su";
+        var day = 'Su';
         switch (new Date().getDay()) {
           case 0:
-              day = "Su";
+              day = 'Su';
               break;
           case 1:
-              day = "M";
+              day = 'M';
               break;
           case 2:
-              day = "Tu";
+              day = 'Tu';
               break;
           case 3:
-              day = "W";
+              day = 'W';
               break;
           case 4:
-              day = "Th";
+              day = 'Th';
               break;
           case 5:
-              day = "F";
+              day = 'F';
               break;
           case 6:
-              day = "Sa";
+              day = 'Sa';
               break;
         }
         return daily.days[day];
-    }
+    };
 
     $scope.sortableOptions = {
         handle: '.handle',
