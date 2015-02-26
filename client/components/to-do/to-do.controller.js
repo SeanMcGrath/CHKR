@@ -110,5 +110,5 @@ angular.module('chkrApp')
     };
 
     // Make sure we start sorted
-    if ($scope.settings.sortTasks) {$scope.sortTodos(angular.noop);};
+    if ($scope.settings.sortTasks) {$scope.sortTodos(angular.noop);}
   });

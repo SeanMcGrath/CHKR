@@ -133,6 +133,6 @@ angular.module('chkrApp')
     };
 
     // Make sure we start sorted
-    if($scope.settings.sortTasks) {angular.noop}
+    if($scope.settings.sortTasks) {$scope.sortDailies(angular.noop);}
 
   });
