@@ -12,6 +12,7 @@ function generateUUID(){
     return uuid;
 }
 
+// Generator for day-of-week control objects for new dailies
 function blankWeek() {
 
     return {
@@ -33,6 +34,7 @@ angular.module('chkrApp')
     $scope.dailies = Auth.getCurrentUser().dailies || [];
     $scope.settings = Auth.getCurrentUser().settings || {};
 
+    // Start everything as not editable
     for (var i=0;i<$scope.dailies.length;i++){
         $scope.dailies[i].editable = false;
     }
@@ -90,6 +92,7 @@ angular.module('chkrApp')
             }); 
     };
 
+    // Check if a daily is active today
     $scope.activeToday = function(daily) {
         var day = 'Su';
         switch (new Date().getDay()) {
@@ -118,6 +121,7 @@ angular.module('chkrApp')
         return daily.days[day];
     };
 
+    //Parameters for sortable widget that controls drag/drop
     $scope.sortableOptions = {
         handle: '.handle',
     	containment: 'parent',
@@ -127,5 +131,8 @@ angular.module('chkrApp')
     	revert: 150,
     	stop: $scope.updateDailies
     };
+
+    // Make sure we start sorted
+    if($scope.settings.sortTasks) {angular.noop}
 
   });

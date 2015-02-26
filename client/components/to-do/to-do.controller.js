@@ -108,4 +108,7 @@ angular.module('chkrApp')
     	revert: 150,
     	stop: $scope.updateTodos
     };
+
+    // Make sure we start sorted
+    if ($scope.settings.sortTasks) {$scope.sortTodos(angluar.noop);};
   });
