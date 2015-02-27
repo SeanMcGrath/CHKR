@@ -19,8 +19,11 @@ angular.module('chkrApp')
         },
         // Wait slightly to ensure login has been processed,
         // Otherwise main screen will redirect back to login
-        function() {
-          $timeout(function() {$location.path('/');}, 100);
+        function(err) {
+          if(err){
+            $scope.errors = err;
+          }
+          else $timeout(function() {$location.path('/');}, 100);
         });
       }
     };
