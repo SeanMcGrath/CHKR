@@ -33,11 +33,6 @@ angular.module('chkrApp')
     $scope.getCurrentUser = Auth.getCurrentUser;
     $scope.dailies = Auth.getCurrentUser().dailies || [];
     $scope.settings = Auth.getCurrentUser().settings || {};
-
-    // Start everything as not editable
-    for (var i=0;i<$scope.dailies.length;i++){
-        $scope.dailies[i].editable = false;
-    }
     
     $scope.addDaily = function() {
     	if($scope.newDaily === ''){
@@ -134,5 +129,11 @@ angular.module('chkrApp')
 
     // Make sure we start sorted
     if($scope.settings.sortTasks) {$scope.sortDailies(angular.noop);}
+
+    // Start everything as not editable, hide dailies that should be invisible
+    for (var i=0;i<$scope.dailies.length;i++){
+        $scope.dailies[i].editable = false;
+        $scope.dailies[i].hidden = !$scope.settings.showAllDailies && !$scope.activeToday($scope.dailies[i]);
+    }
 
   });
