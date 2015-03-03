@@ -39,11 +39,12 @@ angular.module('chkrApp')
     		return;
     	}
     	if ($scope.dailies === undefined){
-			$scope.dailies = [];
-		}
+			   $scope.dailies = [];
+		  }
     	var nd = { name: $scope.newDaily, id: generateUUID(), done: false, editable: false, color: 'white', days: blankWeek()};
     	$scope.dailies.push(nd);
-		$scope.newDaily = '';
+      if($scope.settings.sortTasks) {$scope.sortDailies(angular.noop);}
+		  $scope.newDaily = '';
     	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/dailies', {dailies: $scope.dailies})
     		.success(function(){
     			console.log('Added daily ' + nd.id);

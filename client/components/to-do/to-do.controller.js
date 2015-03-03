@@ -33,6 +33,7 @@ angular.module('chkrApp')
             $scope.todos = [];
         }
     	$scope.todos.push(nt);
+        if ($scope.settings.sortTasks) {$scope.sortTodos(angular.noop);}
         $scope.newTodo = '';
     	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/todos', {todos: $scope.todos})
     		.success(function(){
