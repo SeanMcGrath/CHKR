@@ -3,7 +3,12 @@
 		{
 			"command": "curl --data '{}' localhost:9000/api/users/reset",
 			"schedule": "01 3 * * *",
-			"comment": "reset dailies and todos"
+			"comment": "reset dailies and todos on development server"
+		},
+		{
+			"command": "curl --data '{}' localhost:8080/api/users/reset",
+			"schedule": "01 3 * * *",
+			"comment": "reset dailies and todos on production server"
 		}
 	]
 }
