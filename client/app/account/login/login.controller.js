@@ -23,7 +23,7 @@ angular.module('chkrApp')
           if(err){
             $scope.errors = err;
           }
-          else $timeout(function() {$location.path('/');}, 100);
+          else $timeout(function() {$location.path('/');}, 150);
         });
       }
     };
