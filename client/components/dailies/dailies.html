@@ -1,6 +1,9 @@
 <div ng-controller='DailiesCtrl'>
 	<h1>Daily Tasks</h1>
-	<div class="row task-list" ng-model="dailies" ui-sortable="sortableOptions">
+  <p ng-hide="dailies.length">
+    You don't have any dailies yet! You can add some below, and then edit them.
+  </p>
+	<div class="row task-list" ng-model="dailies" ui-sortable="sortableOptions" ng-show="dailies.length">
 		<li class="nav nav-tabs col-lg-12 task" ng-class="{done: daily.done, editable: daily.editable, red: daily.color === 'red', blue: daily.color === 'blue', green: daily.color === 'green', purple: daily.color === 'purple'}" ng-repeat="daily in dailies" ng-hide="daily.hidden">
       <div class="handle">
         <span class="fa fa-ellipsis-v"></span>

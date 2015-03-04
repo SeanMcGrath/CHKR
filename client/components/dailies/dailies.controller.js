@@ -119,7 +119,7 @@ angular.module('chkrApp')
 
     //Parameters for sortable widget that controls drag/drop
     $scope.sortableOptions = {
-        handle: '.handle',
+      handle: '.handle',
     	containment: 'parent',
     	axis: 'y',
     	cursor: 'grabbing',

@@ -1,6 +1,9 @@
 <div ng-controller='ToDoCtrl'>
 	<h1>To Do</h1>
-	<div class="row task-list" ng-model="todos" ui-sortable="sortableOptions">
+  <p ng-hide="todos.length">
+    Your to do list is empty. You can add and edit tasks below.
+  </p>
+	<div class="row task-list" ng-model="todos" ui-sortable="sortableOptions" ng-show="todos.length">
 		<li class="nav nav-tabs col-md-12 task" ng-class="{done: todo.done, editable: todo.editable, red: todo.color === 'red', blue: todo.color === 'blue', green: todo.color === 'green', purple: todo.color === 'purple'}" ng-repeat="todo in todos">
       <div class="handle">
 	      <span class="fa fa-ellipsis-v"></span>
