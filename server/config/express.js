@@ -39,11 +39,12 @@ module.exports = function(app) {
     secret: config.secrets.session,
     resave: true,
     saveUninitialized: true,
-    store: new mongoStore({ mongoose_connection: mongoose.connection })
+    store: new mongoStore({ mongoose_connection: mongoose.connection }),
+    cookie : { httpOnly: true, maxAge: 2419200000 } // configure when sessions expires
   }));
 
   passport.serializeUser( function(user, done) {
-    var sessionUser = { _id: user._id, name: user.name, email: user.email, roles: user.roles }
+    var sessionUser = { _id: user._id, name: user.name, email: user.email, role: user.role }
     done(null, sessionUser)
   })
 
