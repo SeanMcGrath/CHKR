@@ -31,6 +31,7 @@ module.exports = function(app) {
   app.use(methodOverride());
   app.use(cookieParser());
   app.use(passport.initialize());
+  app.use(passport.session());
 
   // Persist sessions with mongoStore
   // We need to enable sessions for passport twitter because its an oauth 1.0 strategy
@@ -40,6 +41,17 @@ module.exports = function(app) {
     saveUninitialized: true,
     store: new mongoStore({ mongoose_connection: mongoose.connection })
   }));
+
+  passport.serializeUser( function(user, done) {
+    var sessionUser = { _id: user._id, name: user.name, email: user.email, roles: user.roles }
+    done(null, sessionUser)
+  })
+
+  passport.deserializeUser( function(sessionUser, done) {
+    // The sessionUser object is different from the user mongoose collection
+    // it's actually req.session.passport.user and comes from the session collection
+    done(null, sessionUser)
+  })
   
   if ('production' === env) {
     app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
