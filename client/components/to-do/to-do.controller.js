@@ -16,13 +16,21 @@ angular.module('chkrApp')
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
-    $scope.todos = Auth.getCurrentUser().todos || [];
-    $scope.settings = Auth.getCurrentUser().settings || {};
-
-    for (var i=0;i<$scope.todos.length;i++){
-        $scope.todos[i].editable = false;
-        $scope.todos[i].calOpen = false;
-    }
+    // $scope.todos = Auth.getCurrentUser().todos || [];
+    // $scope.settings = Auth.getCurrentUser().settings || {};
+    
+    $http.get('/api/users/me').success(function(user){
+        var todos = user.todos || [];
+        $scope.settings = user.settings || {};
+        for (var i=0;i< todos.length;i++){
+            todos[i].editable = false;
+            todos[i].calOpen = false;
+        }
+        // Make sure we start sorted
+        if ($scope.settings.sortTasks) {$scope.sortTodos(todos, function(sorted){
+            $scope.todos = sorted;
+        });}
+    });
 
     $scope.addTodo = function() {
     	if($scope.newTodo === ''){
@@ -62,21 +70,18 @@ angular.module('chkrApp')
             });
     };
 
-    $scope.sortTodos = function(cb) {
-        if($scope.settings.sortTasks){
-            var dones = [];
-            var undones = [];
-            for(var i=0;i<$scope.todos.length;i++){
-                if ($scope.todos[i].done) {
-                    dones.push($scope.todos[i]);
-                }
-                else {
-                    undones.push($scope.todos[i]);
-                }
+    $scope.sortTodos = function(todos, cb) {
+        var dones = [];
+        var undones = [];
+        for(var i=0;i<todos.length;i++){
+            if (todos[i].done) {
+                dones.push(todos[i]);
             }
-            $scope.todos = undones.concat(dones);
+            else {
+                undones.push(todos[i]);
+            }
         }
-        cb();
+        cb(undones.concat(dones));
     };
 
     $scope.today = function() {
@@ -110,6 +115,4 @@ angular.module('chkrApp')
     	stop: $scope.updateTodos
     };
 
-    // Make sure we start sorted
-    if ($scope.settings.sortTasks) {$scope.sortTodos(angular.noop);}
   });

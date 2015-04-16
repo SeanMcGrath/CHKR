@@ -27,13 +27,8 @@ function blankWeek() {
 }
 
 angular.module('chkrApp')
-  .controller('DailiesCtrl', function ($scope, $http, Auth) {
-    $scope.isLoggedIn = Auth.isLoggedIn;
-    $scope.isAdmin = Auth.isAdmin;
-    $scope.getCurrentUser = Auth.getCurrentUser;
-    $scope.dailies = Auth.getCurrentUser().dailies || [];
-    $scope.settings = Auth.getCurrentUser().settings || {};
-    
+  .controller('DailiesCtrl', function ($scope, $http, Auth, socket) {
+
     $scope.addDaily = function() {
     	if($scope.newDaily === ''){
     		return;
@@ -45,7 +40,7 @@ angular.module('chkrApp')
     	$scope.dailies.push(nd);
       if($scope.settings.sortTasks) {$scope.sortDailies(angular.noop);}
 		  $scope.newDaily = '';
-    	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/dailies', {dailies: $scope.dailies})
+    	$http.post('/api/users/' + $scope.currentUser._id + '/dailies', {dailies: $scope.dailies})
     		.success(function(){
     			console.log('Added daily ' + nd.id);
     		});
@@ -53,15 +48,15 @@ angular.module('chkrApp')
 
     $scope.removeDaily = function(daily) {
     	$scope.dailies = $scope.dailies.filter(function(e){
-			return e.id !== daily.id;
-		});
-        if ($scope.dailies === undefined){
-            $scope.dailies = [];
-        }
-		$http.post('api/users/' + Auth.getCurrentUser()._id + '/dailies', {dailies: $scope.dailies})
-			.success(function() {
-				console.log('Removed Daily ' + daily.id);
-			});
+			 return e.id !== daily.id;
+		  });
+      if ($scope.dailies === undefined){
+          $scope.dailies = [];
+      }
+  		$http.post('api/users/' + $scope.currentUser._id + '/dailies', {dailies: $scope.dailies})
+  			.success(function() {
+  				console.log('Removed Daily ' + daily.id);
+  			});
     };
 
     $scope.sortDailies = function(cb) {
@@ -82,7 +77,7 @@ angular.module('chkrApp')
     };
 
     $scope.updateDailies = function() {
-       $http.post('/api/users/' + Auth.getCurrentUser()._id + '/dailies', {dailies: $scope.dailies})
+       $http.post('/api/users/' + $scope.currentUser._id + '/dailies', {dailies: $scope.dailies})
             .success(function() {
                 console.log('Updated dailies.');
             }); 
@@ -117,6 +112,13 @@ angular.module('chkrApp')
         return daily.days[day];
     };
 
+    $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.isAdmin = Auth.isAdmin;
+    $scope.currentUser = Auth.getCurrentUser();
+    console.log($scope.currentUser.dailies)
+    $scope.dailies = $scope.currentUser.dailies || [];
+    $scope.settings = $scope.currentUser.settings || {};
+
     //Parameters for sortable widget that controls drag/drop
     $scope.sortableOptions = {
       handle: '.handle',
@@ -127,6 +129,10 @@ angular.module('chkrApp')
     	revert: 150,
     	stop: $scope.updateDailies
     };
+
+    $scope.$on('$destroy', function () {
+      socket.unsyncUpdates('user');
+    });
 
     // Make sure we start sorted
     if($scope.settings.sortTasks) {$scope.sortDailies(angular.noop);}

@@ -16,14 +16,13 @@ angular.module('chkrApp')
         Auth.login({
           email: $scope.user.email,
           password: $scope.user.password
-        },
-        // Wait slightly to ensure login has been processed,
-        // Otherwise main screen will redirect back to login
-        function(err) {
-          if(err){
-            $scope.errors = err;
-          }
-          else $timeout(function() {$location.path('/');}, 150);
+        })
+        .then( function() {
+          // Logged in, redirect to home
+          $location.path('/');
+        })
+        .catch( function(err) {
+          $scope.errors.other = err.message;
         });
       }
     };
