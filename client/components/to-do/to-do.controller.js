@@ -15,11 +15,9 @@ angular.module('chkrApp')
   .controller('ToDoCtrl', function ($scope, $http, Auth) {
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
-    $scope.getCurrentUser = Auth.getCurrentUser;
-    // $scope.todos = Auth.getCurrentUser().todos || [];
-    // $scope.settings = Auth.getCurrentUser().settings || {};
+    $scope.currentUser = Auth.getCurrentUser();
     
-    $http.get('/api/users/me').success(function(user){
+    $scope.currentUser.$promise.then(function(user){
         var todos = user.todos || [];
         $scope.settings = user.settings || {};
         for (var i=0;i< todos.length;i++){
