@@ -115,9 +115,21 @@ angular.module('chkrApp')
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.currentUser = Auth.getCurrentUser();
-    console.log($scope.currentUser.dailies)
-    $scope.dailies = $scope.currentUser.dailies || [];
-    $scope.settings = $scope.currentUser.settings || {};
+    $scope.currentUser.$promise.then(function(user){
+        console.log(user);
+        $scope.dailies = user.dailies || [];
+        $scope.settings = user.settings || {};
+        // Make sure we start sorted
+        if($scope.settings.sortTasks) {$scope.sortDailies(angular.noop);}
+
+        // Start everything as not editable, hide dailies that should be invisible
+        for (var i=0;i<$scope.dailies.length;i++){
+            $scope.dailies[i].editable = false;
+            $scope.dailies[i].hidden = !$scope.settings.showAllDailies && !$scope.activeToday($scope.dailies[i]);
+        }
+      });
+    // $scope.dailies = $scope.currentUser.dailies || [];
+    // $scope.settings = $scope.currentUser.settings || {};
 
     //Parameters for sortable widget that controls drag/drop
     $scope.sortableOptions = {
@@ -134,13 +146,6 @@ angular.module('chkrApp')
       socket.unsyncUpdates('user');
     });
 
-    // Make sure we start sorted
-    if($scope.settings.sortTasks) {$scope.sortDailies(angular.noop);}
-
-    // Start everything as not editable, hide dailies that should be invisible
-    for (var i=0;i<$scope.dailies.length;i++){
-        $scope.dailies[i].editable = false;
-        $scope.dailies[i].hidden = !$scope.settings.showAllDailies && !$scope.activeToday($scope.dailies[i]);
-    }
+    
 
   });
