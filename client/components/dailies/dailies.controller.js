@@ -59,25 +59,28 @@ angular.module('chkrApp')
   			});
     };
 
-    $scope.sortDailies = function(cb) {
+    $scope.sortDailies = function(dailies) {
         if($scope.settings.sortTasks){
-            var dones = [];
-            var undones = [];
-            for(var i=0;i<$scope.dailies.length;i++){
-                if ($scope.dailies[i].done) {
-                    dones.push($scope.dailies[i]);
-                }
-                else {
-                    undones.push($scope.dailies[i]);
-                }
+          var dones = [];
+          var undones = [];
+          for(var i=0;i<dailies.length;i++){
+            if (dailies[i].done) {
+              dones.push(dailies[i]);
             }
-            $scope.dailies = undones.concat(dones);
+            else {
+              undones.push(dailies[i]);
+            }
+          }
+          return undones.concat(dones);
         }
-        cb();
+        else{
+          return dailies;
+        }
     };
 
-    $scope.updateDailies = function() {
-       $http.post('/api/users/' + $scope.currentUser._id + '/dailies', {dailies: $scope.dailies})
+    $scope.updateDailies = function(dailies) {
+      $scope.dailies = dailies;
+      $http.post('/api/users/' + $scope.currentUser._id + '/dailies', {dailies: $scope.dailies})
             .success(function() {
                 console.log('Updated dailies.');
             }); 
@@ -136,7 +139,9 @@ angular.module('chkrApp')
     	cursor: 'grabbing',
     	opacity: 1,
     	revert: 150,
-    	stop: $scope.updateDailies
+      stop: function(event, ui){
+        $scope.updateDailies($scope.dailies);
+      }
     };
 
     $scope.$on('$destroy', function () {

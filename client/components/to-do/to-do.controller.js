@@ -122,7 +122,9 @@ angular.module('chkrApp')
     	cursor: 'move',
     	opacity: 1,
     	revert: 150,
-    	stop: $scope.updateTodos
+    	stop: function(event, ui) {
+            $scope.updateTodos($scope.todos);
+        }
     };
 
   });
