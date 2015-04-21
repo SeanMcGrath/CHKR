@@ -25,9 +25,12 @@ angular.module('chkrApp')
             todos[i].calOpen = false;
         }
         // Make sure we start sorted
-        if ($scope.settings.sortTasks) {$scope.sortTodos(todos, function(sorted){
-            $scope.todos = sorted;
-        });}
+        if ($scope.settings.sortTasks) {
+            $scope.todos = $scope.sortTodos(todos);
+        }
+        else {
+            $scope.todos = todos;
+        }
     });
 
     $scope.addTodo = function() {
@@ -39,7 +42,9 @@ angular.module('chkrApp')
             $scope.todos = [];
         }
     	$scope.todos.push(nt);
-        if ($scope.settings.sortTasks) {$scope.sortTodos(angular.noop);}
+        if ($scope.settings.sortTasks) {
+            $scope.todos = $scope.sortTodos($scope.todos, angular.noop);
+        }
         $scope.newTodo = '';
     	$http.post('/api/users/' + Auth.getCurrentUser()._id + '/todos', {todos: $scope.todos})
     		.success(function(){
@@ -60,8 +65,9 @@ angular.module('chkrApp')
 			});
     };
 
-    $scope.updateTodos = function() {
+    $scope.updateTodos = function(todos) {
 
+        $scope.todos = todos;
         $http.post('/api/users/' + Auth.getCurrentUser()._id + '/todos', {todos: $scope.todos})
             .success(function() {
                 console.log('Updated todos.');
@@ -71,15 +77,21 @@ angular.module('chkrApp')
     $scope.sortTodos = function(todos, cb) {
         var dones = [];
         var undones = [];
-        for(var i=0;i<todos.length;i++){
-            if (todos[i].done) {
-                dones.push(todos[i]);
+        if($scope.settings.sortTasks){
+            for(var i=0;i<todos.length;i++){
+                if (todos[i].done) {
+                    dones.push(todos[i]);
+                }
+                else {
+                    undones.push(todos[i]);
+                }
             }
-            else {
-                undones.push(todos[i]);
-            }
+            return undones.concat(dones);
         }
-        cb(undones.concat(dones));
+        else{
+            return todos;
+        }
+        
     };
 
     $scope.today = function() {

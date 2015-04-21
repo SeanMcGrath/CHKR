@@ -8,7 +8,7 @@
       <div class="handle">
 	      <span class="fa fa-ellipsis-v"></span>
       </div>
-      <button type="button" class="check" ng-click="todo.done = !todo.done; todo.editable = false; sortTodos(updateTodos)">
+      <button type="button" class="check" ng-click="todo.done = !todo.done; todo.editable = false; updateTodos(sortTodos(todos));">
         <span class="fa fa-check-square" ng-show="todo.done"></span>
         <span class="fa fa-square-o" ng-hide="todo.done"></span>
       </button>
@@ -21,23 +21,23 @@
       <button type="button" class="delete" ng-click='removeTodo(todo)'>
         <span class="fa fa-trash-o"></span>
       </button>
-      <button type="button" class="edit" ng-click="todo.editable = !todo.editable; updateTodos()" ng-hide="todo.done">
+      <button type="button" class="edit" ng-click="todo.editable = !todo.editable; updateTodos(todos);" ng-hide="todo.done">
         <span class="fa fa-edit"></span>
       </button>
       <span class="color-edit" ng-show="todo.editable && !todo.done">
-        <button class="set-blue" ng-click="todo.color = 'blue'; updateTodos()">
+        <button class="set-blue" ng-click="todo.color = 'blue'; updateTodos(todos);">
           <span class="fa fa-square"></span>
         </button>
-        <button class="set-red" ng-click="todo.color = 'red'; updateTodos()">
+        <button class="set-red" ng-click="todo.color = 'red'; updateTodos(todos);">
           <span class="fa fa-square"></span>
         </button>
-        <button class="set-green" ng-click="todo.color = 'green'; updateTodos()">
+        <button class="set-green" ng-click="todo.color = 'green'; updateTodos(todos);">
           <span class="fa fa-square"></span>
         </button>
-        <button class="set-purple" ng-click="todo.color = 'purple'; updateTodos()">
+        <button class="set-purple" ng-click="todo.color = 'purple'; updateTodos(todos);">
           <span class="fa fa-square"></span>
         </button>
-        <button class="set-white" ng-click="todo.color = ''; updateTodos()">
+        <button class="set-white" ng-click="todo.color = ''; updateTodos(todos);">
           <span class="fa fa-square"></span>
         </button>
       </span>

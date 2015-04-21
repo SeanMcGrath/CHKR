@@ -116,7 +116,6 @@ angular.module('chkrApp')
     $scope.isAdmin = Auth.isAdmin;
     $scope.currentUser = Auth.getCurrentUser();
     $scope.currentUser.$promise.then(function(user){
-        console.log(user);
         $scope.dailies = user.dailies || [];
         $scope.settings = user.settings || {};
         // Make sure we start sorted
@@ -128,8 +127,6 @@ angular.module('chkrApp')
             $scope.dailies[i].hidden = !$scope.settings.showAllDailies && !$scope.activeToday($scope.dailies[i]);
         }
       });
-    // $scope.dailies = $scope.currentUser.dailies || [];
-    // $scope.settings = $scope.currentUser.settings || {};
 
     //Parameters for sortable widget that controls drag/drop
     $scope.sortableOptions = {
@@ -146,6 +143,5 @@ angular.module('chkrApp')
       socket.unsyncUpdates('user');
     });
 
-    
-
+  
   });
