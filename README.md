@@ -7,7 +7,7 @@ Features:
 + A clean, responsive interface facilitated by Angular & Bootstrap.
 + A simple API for managing users and their tasks.
 + A coloring system for task organization.
-+ Automated reset of daily tasks of purging of completed to-dos.
++ Automated reset of daily tasks and purging of completed to-dos.
 + A fully automated build & test system through Grunt and Karma.js.
 + A robust and secure MongoDB database for user information.
 
